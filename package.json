@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "c": "ng serve --project=cryptfolio --port=4201",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
