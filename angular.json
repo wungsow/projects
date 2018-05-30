@@ -2,12 +2,132 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "cryptfolio": {
+      "root": "apps/cryptfolio/",
+      "sourceRoot": "apps/cryptfolio/src",
+      "projectType": "application",
+      "prefix": "projects",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/cryptfolio",
+            "index": "apps/cryptfolio/src/index.html",
+            "main": "apps/cryptfolio/src/main.ts",
+            "polyfills": "apps/cryptfolio/src/polyfills.ts",
+            "tsConfig": "apps/cryptfolio/tsconfig.app.json",
+            "assets": [
+              "apps/cryptfolio/src/favicon.ico",
+              "apps/cryptfolio/src/assets"
+            ],
+            "styles": [
+              "apps/cryptfolio/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/cryptfolio/src/environments/environment.ts",
+                  "with": "apps/cryptfolio/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cryptfolio:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cryptfolio:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cryptfolio:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/cryptfolio/src/test.ts",
+            "polyfills": "apps/cryptfolio/src/polyfills.ts",
+            "tsConfig": "apps/cryptfolio/tsconfig.spec.json",
+            "karmaConfig": "apps/cryptfolio/karma.conf.js",
+            "styles": [
+              "apps/cryptfolio/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/cryptfolio/src/favicon.ico",
+              "apps/cryptfolio/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/cryptfolio/tsconfig.app.json",
+              "apps/cryptfolio/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "cryptfolio-e2e": {
+      "root": "apps/cryptfolio-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/cryptfolio-e2e/protractor.conf.js",
+            "devServerTarget": "cryptfolio:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/cryptfolio-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
     },
     "defaultCollection": "@nrwl/schematics"
-  }
+  },
+  "defaultProject": "cryptfolio"
 }

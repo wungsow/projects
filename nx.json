@@ -1,5 +1,11 @@
 {
   "npmScope": "projects",
   "projects": {
+    "cryptfolio": {
+      "tags": []
+    },
+    "cryptfolio-e2e": {
+      "tags": []
+    }
   }
 }
