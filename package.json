@@ -44,7 +44,8 @@
     "@ngrx/router-store": "5.2.0",
     "@ngrx/store": "5.2.0",
     "@ngrx/store-devtools": "5.2.0",
-    "ngrx-store-freeze": "0.2.2"
+    "ngrx-store-freeze": "0.2.2",
+    "@ngrx/entity": "5.2.0"
   },
   "devDependencies": {
     "@angular/compiler-cli": "6.0.1",
