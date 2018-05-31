@@ -6,7 +6,35 @@ import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
  *  - PortfolioState, and
  *  - portfolioReducer
  */
-export interface PortfolioData {}
+export interface PortfolioData {
+  coins: Coin[];
+  purchases: { [id: string]: Purchase };
+  tickers: { [id: string]: Ticker };
+}
+
+export interface Coin {
+  id: number;
+  name: string;
+  symbol: string;
+}
+
+export interface Ticker extends Coin {
+  quotes: { [currency: string]: Quote }
+}
+
+export interface Quote {
+  price: number;
+  percentChange1h: number;
+  percentChange24h: number;
+  percentChange7d: number;
+}
+
+export interface Purchase {
+  id: number;
+  coinId: number;
+  amount: number;
+  price: number;
+}
 
 /**
  * Interface to the part of the Store containing PortfolioState
@@ -16,7 +44,11 @@ export interface PortfolioState {
   readonly portfolio: PortfolioData;
 }
 
-export const initialState: PortfolioData = {};
+export const initialState: PortfolioData = {
+  coins: [],
+  purchases: {},
+  tickers: {}
+};
 
 export function portfolioReducer(
   state = initialState,
