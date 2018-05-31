@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { portfolioReducer, initialState as portfolioInitialState } from './+state/portfolio.reducer';
 import { PortfolioEffects } from './+state/portfolio.effects';
 import { PortfolioComponent } from './containers/portfolio/portfolio.component';
+import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,7 @@ import { PortfolioComponent } from './containers/portfolio/portfolio.component';
 
     EffectsModule.forFeature([PortfolioEffects])
   ],
-  providers: [PortfolioEffects],
+  providers: [PortfolioEffects, CoinmarketcapService],
   declarations: [PortfolioComponent]
 })
 export class PortfolioModule { }
