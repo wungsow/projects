@@ -17,7 +17,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
     BrowserModule,
     NxModule.forRoot(),
     RouterModule.forRoot([{ path: 'portfolio', loadChildren: '@projects/cryptfolio/portfolio#PortfolioModule' }], { initialNavigation: 'enabled' }),
-    StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze] : [] }),
+    StoreModule.forRoot({}, { metaReducers: !environment.production ? [] : [] }),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule
