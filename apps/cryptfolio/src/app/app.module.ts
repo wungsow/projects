@@ -16,8 +16,8 @@ import { storeFreeze } from 'ngrx-store-freeze';
   imports: [
     BrowserModule,
     NxModule.forRoot(),
-    RouterModule.forRoot([{path: 'cryptfolio-portfolio', loadChildren: '@projects/cryptfolio/portfolio#CryptfolioPortfolioModule'}], { initialNavigation: 'enabled' }),
-    StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze] : [] }),
+    RouterModule.forRoot([{ path: 'portfolio', loadChildren: '@projects/cryptfolio/portfolio#PortfolioModule' }], { initialNavigation: 'enabled' }),
+    StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze] : [] }),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule
@@ -25,4 +25,4 @@ import { storeFreeze } from 'ngrx-store-freeze';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

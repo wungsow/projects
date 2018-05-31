@@ -121,7 +121,7 @@
         }
       }
     },
-    "cryptfolio-portfolio": {
+    "portfolio": {
       "root": "libs/cryptfolio/portfolio",
       "sourceRoot": "libs/cryptfolio/portfolio/src",
       "projectType": "library",

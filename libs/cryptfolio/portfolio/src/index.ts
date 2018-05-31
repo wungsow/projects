@@ -1,1 +1,1 @@
-export * from './lib/cryptfolio-portfolio.module';
+export * from './lib/portfolio.module';

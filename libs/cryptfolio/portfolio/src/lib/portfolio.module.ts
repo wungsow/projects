@@ -10,4 +10,4 @@ import { RouterModule } from '@angular/router';
     ])
   ]
 })
-export class CryptfolioPortfolioModule {}
+export class PortfolioModule { }
