@@ -10,6 +10,7 @@
     "**/*.spec.ts"
   ],
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "../../libs/cryptfolio/portfolio/src/index.ts"
   ]
 }

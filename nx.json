@@ -6,6 +6,9 @@
     },
     "cryptfolio-e2e": {
       "tags": []
+    },
+    "cryptfolio-portfolio": {
+      "tags": []
     }
   }
 }

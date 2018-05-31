@@ -18,6 +18,9 @@
     "paths": {
       "@projects/*": [
         "libs/*"
+      ],
+      "@projects/cryptfolio/portfolio": [
+        "libs/cryptfolio/portfolio/src/index.ts"
       ]
     }
   },
