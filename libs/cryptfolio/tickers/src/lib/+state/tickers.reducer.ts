@@ -6,7 +6,23 @@ import { TickersActions, TickersActionTypes } from './tickers.actions';
  *  - TickersState, and
  *  - tickersReducer
  */
-export interface TickersData {}
+export interface TickersData {
+  [id: string]: Ticker;
+}
+
+export interface Ticker {
+  id: number;
+  name: string;
+  symbol: string;
+  quotes: { [currency: string]: Quote }
+}
+
+export interface Quote {
+  price: number;
+  percentChange1h: number;
+  percentChange24h: number;
+  percentChange7d: number;
+}
 
 /**
  * Interface to the part of the Store containing TickersState

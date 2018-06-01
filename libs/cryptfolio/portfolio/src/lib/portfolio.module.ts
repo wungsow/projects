@@ -1,3 +1,4 @@
+import { TickersModule } from './../../../tickers/src/lib/tickers.module';
 import { CoinsModule } from './../../../coins/src/lib/coins.module';
 import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
 import { NgModule } from '@angular/core';
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     EffectsModule.forFeature([PortfolioEffects]),
 
     HttpClientModule,
-    CoinsModule
+    CoinsModule,
+    TickersModule
   ],
   providers: [PortfolioEffects, CoinmarketcapService],
   declarations: [PortfolioComponent]
