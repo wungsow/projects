@@ -1,9 +1,6 @@
-import { Response } from './response.model';
-import { ResponseArray } from './response-array.model';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Coin, Ticker } from '@projects/cryptfolio/portfolio/src/lib/+state/portfolio.reducer';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -25,4 +22,29 @@ export class CoinmarketcapService {
   }
 
   private getPath(endpoint) { return `https://api.coinmarketcap.com/v2/${endpoint}/` };
+}
+
+export interface Response<T> {
+  data: { [id: string]: T };
+}
+
+export interface ResponseArray<T> {
+  data: T[];
+}
+
+export interface Coin {
+  id: number;
+  name: string;
+  symbol: string;
+}
+
+export interface Ticker extends Coin {
+  quotes: { [currency: string]: Quote }
+}
+
+export interface Quote {
+  price: number;
+  percent_change_1h: number;
+  percent_change_24h: number;
+  percent_change_7d: number;
 }
