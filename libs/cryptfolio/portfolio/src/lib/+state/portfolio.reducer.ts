@@ -1,3 +1,5 @@
+import { CoinsState } from './../../../../coins/src/lib/+state/coins.reducer';
+import { Coin } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
 import { Action } from '@ngrx/store';
 import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
 
@@ -7,15 +9,8 @@ import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
  *  - portfolioReducer
  */
 export interface PortfolioData {
-  coins: Coin[];
   purchases: { [id: string]: Purchase };
   tickers: { [id: string]: Ticker };
-}
-
-export interface Coin {
-  id: number;
-  name: string;
-  symbol: string;
 }
 
 export interface Ticker extends Coin {
@@ -40,12 +35,11 @@ export interface Purchase {
  * Interface to the part of the Store containing PortfolioState
  * and other information related to PortfolioData.
  */
-export interface PortfolioState {
+export interface PortfolioState extends CoinsState {
   readonly portfolio: PortfolioData;
 }
 
 export const initialState: PortfolioData = {
-  coins: [],
   purchases: {},
   tickers: {}
 };

@@ -6,22 +6,26 @@ import { CoinsActions, CoinsActionTypes } from './coins.actions';
  *  - CoinsState, and
  *  - coinsReducer
  */
-export interface CoinsData {}
+export interface Coin {
+  id: number;
+  name: string;
+  symbol: string;
+}
 
 /**
  * Interface to the part of the Store containing CoinsState
  * and other information related to CoinsData.
  */
 export interface CoinsState {
-  readonly coins: CoinsData;
+  readonly coins: Coin[];
 }
 
-export const initialState: CoinsData = {};
+export const initialState: Coin[] = [];
 
 export function coinsReducer(
   state = initialState,
   action: CoinsActions
-): CoinsData {
+): Coin[] {
   switch (action.type) {
     case CoinsActionTypes.CoinsAction:
       return state;
