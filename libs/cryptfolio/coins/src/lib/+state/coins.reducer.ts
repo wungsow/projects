@@ -22,16 +22,10 @@ export interface CoinsState {
 
 export const initialState: Coin[] = [];
 
-export function coinsReducer(
-  state = initialState,
-  action: CoinsActions
-): Coin[] {
+export function coinsReducer(state = initialState, action: CoinsActions): Coin[] {
   switch (action.type) {
-    case CoinsActionTypes.CoinsAction:
-      return state;
-
     case CoinsActionTypes.CoinsLoaded: {
-      return { ...state, ...action.payload };
+      return JSON.parse(JSON.stringify(action.payload));
     }
 
     default:

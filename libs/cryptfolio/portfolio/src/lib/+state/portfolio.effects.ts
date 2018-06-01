@@ -1,3 +1,4 @@
+import { PortfolioComponent } from './../containers/portfolio/portfolio.component';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
@@ -8,6 +9,7 @@ import {
 } from './portfolio.actions';
 import { PortfolioState } from './portfolio.reducer';
 import { DataPersistence } from '@nrwl/nx';
+import { LoadCoins } from '@projects/cryptfolio/coins/src/lib/+state/coins.actions';
 
 @Injectable()
 export class PortfolioEffects {
@@ -28,8 +30,13 @@ export class PortfolioEffects {
     }
   );
 
+  @Effect()
+  initialise$ = this.dataPersistence.navigation(PortfolioComponent, {
+    run: () => new LoadCoins()
+  });
+
   constructor(
     private actions$: Actions,
     private dataPersistence: DataPersistence<PortfolioState>
-  ) {}
+  ) { }
 }

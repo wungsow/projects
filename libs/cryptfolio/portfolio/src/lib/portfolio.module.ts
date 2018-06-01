@@ -1,3 +1,4 @@
+import { CoinsService } from './../../../coins/src/lib/+state/coins.effects';
 import { TickersModule } from './../../../tickers/src/lib/tickers.module';
 import { CoinsModule } from './../../../coins/src/lib/coins.module';
 import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
@@ -26,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     CoinsModule,
     TickersModule
   ],
-  providers: [PortfolioEffects, CoinmarketcapService],
+  providers: [PortfolioEffects, { provide: CoinsService, useClass: CoinmarketcapService }],
   declarations: [PortfolioComponent]
 })
 export class PortfolioModule { }

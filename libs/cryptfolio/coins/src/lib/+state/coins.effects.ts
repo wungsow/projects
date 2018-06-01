@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
@@ -6,18 +8,20 @@ import {
   LoadCoins,
   CoinsLoaded
 } from './coins.actions';
-import { CoinsState } from './coins.reducer';
+import { CoinsState, Coin } from './coins.reducer';
 import { DataPersistence } from '@nrwl/nx';
+import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
+
+
+export abstract class CoinsService {
+  abstract getCoins(): Observable<Coin[]>;
+}
 
 @Injectable()
 export class CoinsEffects {
-  @Effect() effect$ = this.actions$.ofType(CoinsActionTypes.CoinsAction);
-
   @Effect()
   loadCoins$ = this.dataPersistence.fetch(CoinsActionTypes.LoadCoins, {
-    run: (action: LoadCoins, state: CoinsState) => {
-      return new CoinsLoaded(state);
-    },
+    run: (action: LoadCoins, state: CoinsState) => this.coinService.getCoins().pipe(map(coins => new CoinsLoaded(coins))),
 
     onError: (action: LoadCoins, error) => {
       console.error('Error', error);
@@ -26,6 +30,7 @@ export class CoinsEffects {
 
   constructor(
     private actions$: Actions,
-    private dataPersistence: DataPersistence<CoinsState>
-  ) {}
+    private dataPersistence: DataPersistence<CoinsState>,
+    private coinService: CoinsService
+  ) { }
 }
