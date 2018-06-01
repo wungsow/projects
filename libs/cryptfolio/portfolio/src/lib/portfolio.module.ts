@@ -1,4 +1,4 @@
-import { Portfolio } from './+state/portfolio.actions';
+import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { portfolioReducer, initialState as portfolioInitialState } from './+state/portfolio.reducer';
 import { PortfolioEffects } from './+state/portfolio.effects';
 import { PortfolioComponent } from './containers/portfolio/portfolio.component';
-import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +18,9 @@ import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/ser
 
     StoreModule.forFeature('portfolio', portfolioReducer, { initialState: portfolioInitialState }),
 
-    EffectsModule.forFeature([PortfolioEffects])
+    EffectsModule.forFeature([PortfolioEffects]),
+
+    HttpClientModule
   ],
   providers: [PortfolioEffects, CoinmarketcapService],
   declarations: [PortfolioComponent]

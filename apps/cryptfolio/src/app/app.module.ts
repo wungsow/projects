@@ -9,14 +9,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { storeFreeze } from 'ngrx-store-freeze';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     NxModule.forRoot(),
-    RouterModule.forRoot([{ path: 'portfolio', loadChildren: '@projects/cryptfolio/portfolio#PortfolioModule' }], { initialNavigation: 'enabled' }),
+    RouterModule.forRoot([
+      { path: '', pathMatch: 'full', redirectTo: 'portfolio' },
+      { path: 'portfolio', loadChildren: '@projects/cryptfolio/portfolio#PortfolioModule' }], { initialNavigation: 'enabled' }),
     StoreModule.forRoot({}, { metaReducers: !environment.production ? [] : [] }),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],

@@ -3,6 +3,10 @@
     "node_modules/codelyzer",
     "node_modules/@nrwl/schematics/src/tslint"
   ],
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
