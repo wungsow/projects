@@ -19,9 +19,9 @@ export interface Ticker {
 
 export interface Quote {
   price: number;
-  percentChange1h: number;
-  percentChange24h: number;
-  percentChange7d: number;
+  percent_change_1h: number;
+  percent_change_24h: number;
+  percent_change_7d: number;
 }
 
 /**

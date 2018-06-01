@@ -2,9 +2,11 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { CoinsService } from '@projects/cryptfolio/coins/src/lib/+state/coins.effects';
+import { TickersService } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.effects';
 
 @Injectable()
-export class CoinmarketcapService {
+export class CoinmarketcapService implements CoinsService, TickersService {
   private readonly listingsPath = this.getPath('listings');
   private readonly tickersPath = this.getPath('ticker');
   private readonly tickerLimit = 100;

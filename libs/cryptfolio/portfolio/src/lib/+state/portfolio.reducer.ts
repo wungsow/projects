@@ -9,7 +9,7 @@ import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
  *  - portfolioReducer
  */
 export interface PortfolioData {
-   [id: string]: Purchase;
+  [id: string]: Purchase;
 }
 
 export interface Purchase {
@@ -34,9 +34,6 @@ export function portfolioReducer(
   action: PortfolioActions
 ): PortfolioData {
   switch (action.type) {
-    case PortfolioActionTypes.PortfolioAction:
-      return state;
-
     case PortfolioActionTypes.PortfolioLoaded: {
       return { ...state, ...action.payload };
     }

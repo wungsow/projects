@@ -28,7 +28,10 @@ import { TickersService } from '@projects/cryptfolio/tickers/src/lib/+state/tick
     CoinsModule,
     TickersModule
   ],
-  providers: [PortfolioEffects, { provide: CoinsService, useClass: CoinmarketcapService }, { provide: TickersService, useClass: CoinmarketcapService }],
+  providers: [PortfolioEffects,
+    CoinmarketcapService,
+    { provide: CoinsService, useExisting: CoinmarketcapService },
+    { provide: TickersService, useExisting: CoinmarketcapService }],
   declarations: [PortfolioComponent]
 })
 export class PortfolioModule { }

@@ -14,15 +14,21 @@ import { LoadCoins } from '@projects/cryptfolio/coins/src/lib/+state/coins.actio
 
 @Injectable()
 export class PortfolioEffects {
-  @Effect()
-  effect$ = this.actions$.ofType(PortfolioActionTypes.PortfolioAction);
 
   @Effect()
   loadPortfolio$ = this.dataPersistence.fetch(
     PortfolioActionTypes.LoadPortfolio,
     {
       run: (action: LoadPortfolio, state: PortfolioState) => {
-        return new PortfolioLoaded(state);
+        // TODO get from local storage
+        return new PortfolioLoaded({
+          1: {
+            amount: 2,
+            coinId: 1,
+            id: 1,
+            price: 4000
+          }
+        });
       },
 
       onError: (action: LoadPortfolio, error) => {
@@ -31,11 +37,16 @@ export class PortfolioEffects {
     }
   );
 
+
+
   @Effect()
   initialiseCoins$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadCoins() });
 
   @Effect()
-  initialiseTickers$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadTickers() });
+  initialisePortfolio$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadPortfolio() });
+
+  @Effect()
+  loadTickers$ = this.dataPersistence.fetch(PortfolioActionTypes.PortfolioLoaded, { run: () => new LoadTickers() });
 
   constructor(
     private actions$: Actions,
