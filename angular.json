@@ -148,6 +148,34 @@
           }
         }
       }
+    },
+    "coins": {
+      "root": "libs/cryptfolio/coins",
+      "sourceRoot": "libs/cryptfolio/coins/src",
+      "projectType": "library",
+      "prefix": "projects",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/cryptfolio/coins/src/test.ts",
+            "tsConfig": "libs/cryptfolio/coins/tsconfig.spec.json",
+            "karmaConfig": "libs/cryptfolio/coins/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/cryptfolio/coins/tsconfig.lib.json",
+              "libs/cryptfolio/coins/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
