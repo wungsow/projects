@@ -24,6 +24,9 @@
       ],
       "@projects/cryptfolio/coins": [
         "libs/cryptfolio/coins/src/index.ts"
+      ],
+      "@projects/cryptfolio/tickers": [
+        "libs/cryptfolio/tickers/src/index.ts"
       ]
     }
   },

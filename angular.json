@@ -176,6 +176,34 @@
           }
         }
       }
+    },
+    "tickers": {
+      "root": "libs/cryptfolio/tickers",
+      "sourceRoot": "libs/cryptfolio/tickers/src",
+      "projectType": "library",
+      "prefix": "projects",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/cryptfolio/tickers/src/test.ts",
+            "tsConfig": "libs/cryptfolio/tickers/tsconfig.spec.json",
+            "karmaConfig": "libs/cryptfolio/tickers/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/cryptfolio/tickers/tsconfig.lib.json",
+              "libs/cryptfolio/tickers/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -12,6 +12,9 @@
     },
     "coins": {
       "tags": []
+    },
+    "tickers": {
+      "tags": []
     }
   }
 }
