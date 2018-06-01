@@ -1,3 +1,4 @@
+import { LoadTickers } from './../../../../tickers/src/lib/+state/tickers.actions';
 import { PortfolioComponent } from './../containers/portfolio/portfolio.component';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
@@ -31,9 +32,10 @@ export class PortfolioEffects {
   );
 
   @Effect()
-  initialise$ = this.dataPersistence.navigation(PortfolioComponent, {
-    run: () => new LoadCoins()
-  });
+  initialiseCoins$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadCoins() });
+
+  @Effect()
+  initialiseTickers$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadTickers() });
 
   constructor(
     private actions$: Actions,

@@ -39,8 +39,6 @@ export function tickersReducer(
   action: TickersActions
 ): TickersData {
   switch (action.type) {
-    case TickersActionTypes.TickersAction:
-      return state;
 
     case TickersActionTypes.TickersLoaded: {
       return { ...state, ...action.payload };

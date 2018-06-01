@@ -11,6 +11,7 @@ import { portfolioReducer, initialState as portfolioInitialState } from './+stat
 import { PortfolioEffects } from './+state/portfolio.effects';
 import { PortfolioComponent } from './containers/portfolio/portfolio.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TickersService } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.effects';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     CoinsModule,
     TickersModule
   ],
-  providers: [PortfolioEffects, { provide: CoinsService, useClass: CoinmarketcapService }],
+  providers: [PortfolioEffects, { provide: CoinsService, useClass: CoinmarketcapService }, { provide: TickersService, useClass: CoinmarketcapService }],
   declarations: [PortfolioComponent]
 })
 export class PortfolioModule { }
