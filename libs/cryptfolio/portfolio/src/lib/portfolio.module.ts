@@ -1,7 +1,4 @@
-import { CoinsService } from './../../../coins/src/lib/+state/coins.effects';
-import { TickersModule } from './../../../tickers/src/lib/tickers.module';
-import { CoinsModule } from './../../../coins/src/lib/coins.module';
-import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
+import { CoinmarketcapService } from './services/coinmarketcap.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -12,6 +9,10 @@ import { PortfolioEffects } from './+state/portfolio.effects';
 import { PortfolioComponent } from './containers/portfolio/portfolio.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TickersService } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.effects';
+import { LocalStorageModule } from '@projects/shared/local-storage/src';
+import { CoinsModule } from '@projects/cryptfolio/coins/src';
+import { TickersModule } from '@projects/cryptfolio/tickers/src';
+import { CoinsService } from '@projects/cryptfolio/coins/src/lib/+state/coins.effects';
 @NgModule({
   imports: [
     CommonModule,

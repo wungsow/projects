@@ -8,20 +8,22 @@ import {
   LoadPortfolio,
   PortfolioLoaded
 } from './portfolio.actions';
-import { PortfolioState } from './portfolio.reducer';
+import { PortfolioState, PortfolioData } from './portfolio.reducer';
 import { DataPersistence } from '@nrwl/nx';
 import { LoadCoins } from '@projects/cryptfolio/coins/src/lib/+state/coins.actions';
+import { LocalStorageService } from '@projects/shared/local-storage/src/lib/local-storage.service';
 
 @Injectable()
 export class PortfolioEffects {
+  private readonly storageKey = 'portfolio';
 
   @Effect()
   loadPortfolio$ = this.dataPersistence.fetch(
     PortfolioActionTypes.LoadPortfolio,
     {
       run: (action: LoadPortfolio, state: PortfolioState) => {
-        // TODO get from local storage
-        return new PortfolioLoaded({
+        // TODO Remove-----------------------------------------------------------------------------
+        this.localStrorageService.setItem(this.storageKey, {
           1: {
             amount: 2,
             coinId: 1,
@@ -35,6 +37,10 @@ export class PortfolioEffects {
             price: 4000
           }
         });
+        // ---------------------------------------------------------------------------------------
+        const storedPortfolio = this.localStrorageService.getItem<PortfolioData>(this.storageKey);
+        // TODO get from local storage
+        return new PortfolioLoaded(storedPortfolio);
       },
 
       onError: (action: LoadPortfolio, error) => {
@@ -56,6 +62,7 @@ export class PortfolioEffects {
 
   constructor(
     private actions$: Actions,
-    private dataPersistence: DataPersistence<PortfolioState>
+    private dataPersistence: DataPersistence<PortfolioState>,
+    private localStrorageService: LocalStorageService
   ) { }
 }
