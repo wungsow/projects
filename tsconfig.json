@@ -27,6 +27,9 @@
       ],
       "@projects/cryptfolio/tickers": [
         "libs/cryptfolio/tickers/src/index.ts"
+      ],
+      "@projects/shared/local-storage": [
+        "libs/shared/local-storage/src/index.ts"
       ]
     }
   },

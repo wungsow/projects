@@ -15,6 +15,9 @@
     },
     "tickers": {
       "tags": []
+    },
+    "local-storage": {
+      "tags": []
     }
   }
 }
