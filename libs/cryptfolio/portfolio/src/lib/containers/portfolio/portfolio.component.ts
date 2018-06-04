@@ -1,4 +1,6 @@
+import { PortfolioState, portfolioEntries } from './../../+state/portfolio.reducer';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'projects-portfolio',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortfolioComponent implements OnInit {
 
-  constructor() { }
+  portfolioEntries$ = this.store.select(portfolioEntries);
+
+  constructor(private store: Store<PortfolioState>) { }
 
   ngOnInit() {
   }

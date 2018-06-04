@@ -1,6 +1,7 @@
+import { Action } from '@ngrx/store';
 import { LoadTickers } from './../../../../tickers/src/lib/+state/tickers.actions';
 import { PortfolioComponent } from './../containers/portfolio/portfolio.component';
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
   PortfolioActions,
@@ -12,6 +13,7 @@ import { PortfolioState, PortfolioData } from './portfolio.reducer';
 import { DataPersistence } from '@nrwl/nx';
 import { LoadCoins } from '@projects/cryptfolio/coins/src/lib/+state/coins.actions';
 import { LocalStorageService } from '@projects/shared/local-storage/src/lib/local-storage.service';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
 export class PortfolioEffects {
@@ -49,8 +51,9 @@ export class PortfolioEffects {
     }
   );
 
+
   @Effect()
-  initialiseCoins$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadCoins() });
+  initialiseCoins$ = this.onNav(PortfolioComponent, new LoadCoins());
 
   @Effect()
   initialisePortfolio$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadPortfolio() });
@@ -65,4 +68,15 @@ export class PortfolioEffects {
     private dataPersistence: DataPersistence<PortfolioState>,
     private localStrorageService: LocalStorageService
   ) { }
+
+  onNav<T>(component: Type<any>, action: Action) {
+    return this.dataPersistence.navigation(component, {
+      run: () => action,
+      onError: (route, error) => this.handleError(error)
+    });
+  }
+
+  handleError(error) {
+    // TODO
+  }
 }
