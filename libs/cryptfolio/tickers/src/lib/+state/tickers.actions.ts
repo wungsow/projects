@@ -8,6 +8,7 @@ export enum TickersActionTypes {
 
 export class LoadTickers implements Action {
   readonly type = TickersActionTypes.LoadTickers;
+  constructor(public payload: string[]) { }
 }
 
 export class TickersLoaded implements Action {

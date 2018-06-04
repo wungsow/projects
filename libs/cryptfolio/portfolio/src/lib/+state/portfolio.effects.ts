@@ -27,6 +27,12 @@ export class PortfolioEffects {
             coinId: 1,
             id: 1,
             price: 4000
+          },
+          2: {
+            amount: 2,
+            coinId: 2757,
+            id: 1,
+            price: 4000
           }
         });
       },
@@ -37,8 +43,6 @@ export class PortfolioEffects {
     }
   );
 
-
-
   @Effect()
   initialiseCoins$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadCoins() });
 
@@ -46,7 +50,9 @@ export class PortfolioEffects {
   initialisePortfolio$ = this.dataPersistence.navigation(PortfolioComponent, { run: () => new LoadPortfolio() });
 
   @Effect()
-  loadTickers$ = this.dataPersistence.fetch(PortfolioActionTypes.PortfolioLoaded, { run: () => new LoadTickers() });
+  loadTickers$ = this.dataPersistence.fetch(PortfolioActionTypes.PortfolioLoaded, {
+    run: (({ payload }: PortfolioLoaded) => new LoadTickers(Object.values(payload).map(item => item.coinId.toString())))
+  });
 
   constructor(
     private actions$: Actions,
