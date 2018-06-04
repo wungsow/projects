@@ -13,6 +13,7 @@ import { LocalStorageModule } from '@projects/shared/local-storage/src';
 import { CoinsModule } from '@projects/cryptfolio/coins/src';
 import { TickersModule } from '@projects/cryptfolio/tickers/src';
 import { CoinsService } from '@projects/cryptfolio/coins/src/lib/+state/coins.effects';
+import { EntriesComponent } from './components/entries/entries.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +34,6 @@ import { CoinsService } from '@projects/cryptfolio/coins/src/lib/+state/coins.ef
     CoinmarketcapService,
     { provide: CoinsService, useExisting: CoinmarketcapService },
     { provide: TickersService, useExisting: CoinmarketcapService }],
-  declarations: [PortfolioComponent]
+  declarations: [PortfolioComponent, EntriesComponent]
 })
 export class PortfolioModule { }

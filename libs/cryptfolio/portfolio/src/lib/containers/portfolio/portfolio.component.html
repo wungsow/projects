@@ -1,7 +1,1 @@
-<p>
-  portfolio works!
-</p>
-
-<div *ngFor="let entry of portfolioEntries$ |async">
-  {{ entry | json }}
-</div>
+<pflo-entries [entries]='portfolioEntries$ | async'></pflo-entries>

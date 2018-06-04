@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "projects",
+      "pflo",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "projects",
+      "pflo",
       "kebab-case"
     ]
   }
