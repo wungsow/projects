@@ -27,7 +27,8 @@
               "apps/cryptfolio/src/assets"
             ],
             "styles": [
-              "apps/cryptfolio/src/styles.scss"
+              "apps/cryptfolio/src/styles.scss",
+              "./node_modules/@clr/ui/clr-ui.min.css"
             ],
             "scripts": []
           },
