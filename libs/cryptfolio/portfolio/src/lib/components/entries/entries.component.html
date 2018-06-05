@@ -9,7 +9,9 @@
   <clr-dg-column [clrDgField]="'quote.percent_change_1h'">Activity 1h</clr-dg-column>
 
   <clr-dg-row *clrDgItems="let entry of entries">
-    <clr-dg-cell>{{entry.name}}</clr-dg-cell>
+    <clr-dg-cell>
+      <pflo-coin [coin]=entry></pflo-coin>
+    </clr-dg-cell>
     <clr-dg-cell>{{entry.amount}}</clr-dg-cell>
     <clr-dg-cell>{{entry.price}}</clr-dg-cell>
     <clr-dg-cell>{{entry.quote.price}}</clr-dg-cell>

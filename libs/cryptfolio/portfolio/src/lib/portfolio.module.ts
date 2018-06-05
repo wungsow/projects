@@ -16,6 +16,7 @@ import { CoinsService } from '@projects/cryptfolio/coins/src/lib/+state/coins.ef
 import { EntriesComponent } from './components/entries/entries.component';
 import { ClarityModule } from '@clr/angular';
 import { PercentageComponent } from './components/percentage/percentage.component';
+import { CoinComponent } from './components/coin/coin.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,6 +38,6 @@ import { PercentageComponent } from './components/percentage/percentage.componen
     CoinmarketcapService,
     { provide: CoinsService, useExisting: CoinmarketcapService },
     { provide: TickersService, useExisting: CoinmarketcapService }],
-  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent]
+  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent, CoinComponent]
 })
 export class PortfolioModule { }
