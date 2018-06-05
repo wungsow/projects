@@ -1,5 +1,6 @@
+import { AsyncState } from './../../../../../shared/static/src/lib/+state/async-state';
 import { Action } from '@ngrx/store';
-import { TickersActions, TickersActionTypes } from './tickers.actions';
+import { TickersActions, TickersActionTypes, LoadTickers } from './tickers.actions';
 
 /**
  * Interface for the 'Tickers' data used in
@@ -29,19 +30,23 @@ export interface Quote {
  * and other information related to TickersData.
  */
 export interface TickersState {
-  readonly tickers: TickersData;
+  readonly tickers: AsyncState<TickersData>;
 }
 
-export const initialState: TickersData = {};
+export const initialState: AsyncState<TickersData> = { loading: false, data: {} };
 
 export function tickersReducer(
   state = initialState,
   action: TickersActions
-): TickersData {
+): AsyncState<TickersData> {
   switch (action.type) {
 
     case TickersActionTypes.TickersLoaded: {
-      return { ...state, ...action.payload };
+      return { ...state, data: { ...action.payload }, loading: false };
+    }
+
+    case TickersActionTypes.LoadTickers: {
+      return { ...state, loading: true };
     }
 
     default:

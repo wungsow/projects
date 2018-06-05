@@ -1,3 +1,17 @@
 <div *ngFor="let entry of entries">
   <pflo-entry [entry]=entry></pflo-entry>
 </div>
+
+<clr-datagrid>
+  <clr-dg-column>Id</clr-dg-column>
+  <clr-dg-column>Amount</clr-dg-column>
+  <clr-dg-column>Price</clr-dg-column>
+
+  <clr-dg-row *ngFor="let entry of entries">
+    <clr-dg-cell>{{entry.id}}</clr-dg-cell>
+    <clr-dg-cell>{{entry.amount}}</clr-dg-cell>
+    <clr-dg-cell>{{entry.price}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{entries.length}} Purchases</clr-dg-footer>
+</clr-datagrid>
