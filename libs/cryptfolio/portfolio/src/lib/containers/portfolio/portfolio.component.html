@@ -1,1 +1,1 @@
-<pflo-entries [entries]='portfolioEntries$ | async'></pflo-entries>
+<pflo-entries *ngIf='(portfolioEntries$ | async); let entries' [entries]='entries.data' [loading]='entries.loading'></pflo-entries>

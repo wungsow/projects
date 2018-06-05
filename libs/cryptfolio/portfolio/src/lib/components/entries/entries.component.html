@@ -1,8 +1,4 @@
-<div *ngFor="let entry of entries">
-  <pflo-entry [entry]=entry></pflo-entry>
-</div>
-
-<clr-datagrid>
+<clr-datagrid [clrDgLoading]="loading">
   <clr-dg-column>Id</clr-dg-column>
   <clr-dg-column>Amount</clr-dg-column>
   <clr-dg-column>Price</clr-dg-column>

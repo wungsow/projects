@@ -14,7 +14,6 @@ import { CoinsModule } from '@projects/cryptfolio/coins/src';
 import { TickersModule } from '@projects/cryptfolio/tickers/src';
 import { CoinsService } from '@projects/cryptfolio/coins/src/lib/+state/coins.effects';
 import { EntriesComponent } from './components/entries/entries.component';
-import { EntryComponent } from './components/entry/entry.component';
 import { ClarityModule } from '@clr/angular';
 @NgModule({
   imports: [
@@ -37,6 +36,6 @@ import { ClarityModule } from '@clr/angular';
     CoinmarketcapService,
     { provide: CoinsService, useExisting: CoinmarketcapService },
     { provide: TickersService, useExisting: CoinmarketcapService }],
-  declarations: [PortfolioComponent, EntriesComponent, EntryComponent]
+  declarations: [PortfolioComponent, EntriesComponent]
 })
 export class PortfolioModule { }

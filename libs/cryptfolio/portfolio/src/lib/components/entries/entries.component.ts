@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./entries.component.scss']
 })
 export class EntriesComponent {
+  @Input() loading = true;
   @Input() entries: PortfolioEntry[]
   constructor() { }
 }
