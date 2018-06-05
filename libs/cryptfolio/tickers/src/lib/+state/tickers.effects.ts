@@ -1,10 +1,9 @@
-import { map, flatMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Effect } from '@ngrx/effects';
 import {
-  TickersActions,
   TickersActionTypes,
   LoadTickers,
   TickersLoaded
@@ -30,7 +29,6 @@ export class TickersEffects {
   });
 
   constructor(
-    private actions$: Actions,
     private dataPersistence: DataPersistence<TickersState>,
     private tickersService: TickersService
   ) { }

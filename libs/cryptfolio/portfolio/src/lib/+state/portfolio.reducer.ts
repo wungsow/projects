@@ -1,9 +1,8 @@
 import { Currency } from './curency.enum';
-import { TickersData, Quote } from './../../../../tickers/src/lib/+state/tickers.reducer';
-import { Coin, CoinsState } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
-import { Action, createSelector } from '@ngrx/store';
-import { PortfolioActions, PortfolioActionTypes, LoadPortfolio } from './portfolio.actions';
-import { TickersState, Ticker } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
+import { CoinsState } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
+import { createSelector } from '@ngrx/store';
+import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
+import { TickersState, Quote, TickersData } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
 import { AsyncState } from '@projects/shared/static/src/lib/+state/async-state';
 
 /**

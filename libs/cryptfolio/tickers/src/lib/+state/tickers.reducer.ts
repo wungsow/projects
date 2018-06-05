@@ -1,6 +1,6 @@
-import { AsyncState } from './../../../../../shared/static/src/lib/+state/async-state';
 import { Action } from '@ngrx/store';
-import { TickersActions, TickersActionTypes, LoadTickers } from './tickers.actions';
+import { TickersActions, TickersActionTypes } from './tickers.actions';
+import { AsyncState } from '@projects/shared/static/src';
 
 /**
  * Interface for the 'Tickers' data used in

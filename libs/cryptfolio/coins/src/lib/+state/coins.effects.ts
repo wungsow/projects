@@ -1,17 +1,14 @@
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Effect } from '@ngrx/effects';
 import {
-  CoinsActions,
   CoinsActionTypes,
   LoadCoins,
   CoinsLoaded
 } from './coins.actions';
 import { CoinsState, Coin } from './coins.reducer';
 import { DataPersistence } from '@nrwl/nx';
-import { CoinmarketcapService } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
-
 
 export abstract class CoinsService {
   abstract getCoins(): Observable<Coin[]>;
@@ -29,7 +26,6 @@ export class CoinsEffects {
   });
 
   constructor(
-    private actions$: Actions,
     private dataPersistence: DataPersistence<CoinsState>,
     private coinService: CoinsService
   ) { }

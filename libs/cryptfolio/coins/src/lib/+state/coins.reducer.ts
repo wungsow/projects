@@ -1,7 +1,5 @@
-import { LoadCoins } from '@projects/cryptfolio/coins/src/lib/+state/coins.actions';
-import { Action } from '@ngrx/store';
 import { CoinsActions, CoinsActionTypes } from './coins.actions';
-import { AsyncState } from '@projects/shared/static/src/lib/+state/async-state';
+import { AsyncState } from '@projects/shared/static/src';
 
 /**
  * Interface for the 'Coins' data used in
