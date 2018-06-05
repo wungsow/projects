@@ -1,4 +1,4 @@
-<clr-datagrid [clrDgLoading]="loading">
+<clr-datagrid [clrDgLoading]="loading" [(clrDgSelected)]="selected" [clDgRowSelection]="true">
   <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
   <clr-dg-column [clrDgField]="'amount'">Amount</clr-dg-column>
   <clr-dg-column [clrDgField]="'price'">Purchase Price</clr-dg-column>
@@ -8,7 +8,7 @@
   <clr-dg-column [clrDgField]="'quote.percent_change_24h'">Activity 24h</clr-dg-column>
   <clr-dg-column [clrDgField]="'quote.percent_change_1h'">Activity 1h</clr-dg-column>
 
-  <clr-dg-row *clrDgItems="let entry of entries">
+  <clr-dg-row *clrDgItems="let entry of entries" [clrDgItem]="entry">
     <clr-dg-cell>
       <pflo-coin [coin]=entry></pflo-coin>
     </clr-dg-cell>
@@ -31,3 +31,5 @@
 
   <clr-dg-footer>{{entries.length}} Purchases</clr-dg-footer>
 </clr-datagrid>
+
+Selected: {{selected.length}}

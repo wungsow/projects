@@ -1,5 +1,5 @@
 import { PortfolioEntry } from './../../+state/portfolio.reducer';
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'pflo-entries',
@@ -10,5 +10,6 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 export class EntriesComponent {
   @Input() loading = true;
   @Input() entries: PortfolioEntry[];
+  selected: PortfolioEntry[] = [];
   constructor() { }
 }
