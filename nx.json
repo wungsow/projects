@@ -18,6 +18,9 @@
     },
     "local-storage": {
       "tags": []
+    },
+    "shared-static": {
+      "tags": []
     }
   }
 }

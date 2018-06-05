@@ -233,6 +233,34 @@
           }
         }
       }
+    },
+    "shared-static": {
+      "root": "libs/shared/static",
+      "sourceRoot": "libs/shared/static/src",
+      "projectType": "library",
+      "prefix": "projects",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/static/src/test.ts",
+            "tsConfig": "libs/shared/static/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/static/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/static/tsconfig.lib.json",
+              "libs/shared/static/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
