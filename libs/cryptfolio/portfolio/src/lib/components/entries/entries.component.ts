@@ -11,10 +11,4 @@ export class EntriesComponent {
   @Input() loading = true;
   @Input() entries: PortfolioEntry[];
   constructor() { }
-
-  getChange({ price, quote }: PortfolioEntry): number {
-    const currentPrice = quote && quote.price;
-
-    return price && currentPrice && Math.round(100 * (currentPrice - price) / price);
-  }
 }

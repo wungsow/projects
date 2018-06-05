@@ -38,6 +38,7 @@ export interface PortfolioEntry extends Purchase {
   name: string;
   symbol: string;
   quote: Quote;
+  change: number;
 }
 
 export const initialState: Portfolio = { loading: false, data: {}, currency: Currency.USD };
@@ -72,7 +73,14 @@ function getPortfolioEntries(portfolio: Portfolio, tickers: AsyncState<TickersDa
 function createPortfolioEntry(purchase: Purchase, tickers: TickersData, currency: Currency): PortfolioEntry {
   const ticker = tickers[purchase.coinId],
     { name, symbol } = { ...ticker },
-    quote = ticker && ticker.quotes[currency];
+    quote = ticker && ticker.quotes[currency],
+    change = getChange(purchase.price, quote);
 
-  return { ...purchase, name, symbol, quote };
+  return { ...purchase, name, symbol, quote, change };
+}
+
+function getChange(price, quote: Quote): number {
+  const currentPrice = quote && quote.price;
+
+  return price && currentPrice ? Math.round(100 * (currentPrice - price) / price) : null;
 }

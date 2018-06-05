@@ -3,7 +3,7 @@
   <clr-dg-column [clrDgField]="'amount'">Amount</clr-dg-column>
   <clr-dg-column [clrDgField]="'price'">Purchase Price</clr-dg-column>
   <clr-dg-column [clrDgField]="'quote.price'">Current Price</clr-dg-column>
-  <clr-dg-column>Change</clr-dg-column>
+  <clr-dg-column [clrDgField]="'change'">Change</clr-dg-column>
   <clr-dg-column [clrDgField]="'quote.percent_change_7d'">Activity 7d</clr-dg-column>
   <clr-dg-column [clrDgField]="'quote.percent_change_24h'">Activity 24h</clr-dg-column>
   <clr-dg-column [clrDgField]="'quote.percent_change_1h'">Activity 1h</clr-dg-column>
@@ -14,11 +14,17 @@
     <clr-dg-cell>{{entry.price}}</clr-dg-cell>
     <clr-dg-cell>{{entry.quote.price}}</clr-dg-cell>
     <clr-dg-cell>
-      <span class="badge">{{getChange(entry)}}%</span>
+      <pflo-percentage [value]=entry.change></pflo-percentage>
     </clr-dg-cell>
-    <clr-dg-cell>{{entry.quote.percent_change_7d}}%</clr-dg-cell>
-    <clr-dg-cell>{{entry.quote.percent_change_24h}}%</clr-dg-cell>
-    <clr-dg-cell>{{entry.quote.percent_change_1h}}%</clr-dg-cell>
+    <clr-dg-cell>
+      <pflo-percentage [value]=entry.quote.percent_change_7d></pflo-percentage>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <pflo-percentage [value]=entry.quote.percent_change_24h></pflo-percentage>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <pflo-percentage [value]=entry.quote.percent_change_1h></pflo-percentage>
+    </clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>{{entries.length}} Purchases</clr-dg-footer>
