@@ -1,4 +1,5 @@
-import { TickersData } from './../../../../tickers/src/lib/+state/tickers.reducer';
+import { Currency } from './curency.enum';
+import { TickersData, Quote } from './../../../../tickers/src/lib/+state/tickers.reducer';
 import { Coin, CoinsState } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
 import { Action, createSelector } from '@ngrx/store';
 import { PortfolioActions, PortfolioActionTypes, LoadPortfolio } from './portfolio.actions';
@@ -26,19 +27,25 @@ export interface Purchase {
  * and other information related to PortfolioData.
  */
 export interface PortfolioState extends CoinsState, TickersState {
-  readonly portfolio: AsyncState<PortfolioData>;
+  readonly portfolio: Portfolio;
+}
+
+export interface Portfolio extends AsyncState<PortfolioData> {
+  currency: Currency
 }
 
 export interface PortfolioEntry extends Purchase {
-  coinData: Ticker;
+  name: string;
+  symbol: string;
+  quote: Quote;
 }
 
-export const initialState: AsyncState<PortfolioData> = { loading: false, data: {} };
+export const initialState: Portfolio = { loading: false, data: {}, currency: Currency.USD };
 
 export function portfolioReducer(
   state = initialState,
   action: PortfolioActions
-): AsyncState<PortfolioData> {
+): Portfolio {
   switch (action.type) {
     case PortfolioActionTypes.PortfolioLoaded: {
       return { ...state, data: { ...action.payload }, loading: false };
@@ -55,9 +62,17 @@ export function portfolioReducer(
 
 export const portfolioEntries = createSelector([(state: PortfolioState) => state.portfolio, (state: PortfolioState) => state.tickers], getPortfolioEntries);
 
-function getPortfolioEntries(portfolio: AsyncState<PortfolioData>, tickers: AsyncState<TickersData>): AsyncState<PortfolioEntry[]> {
+function getPortfolioEntries(portfolio: Portfolio, tickers: AsyncState<TickersData>): AsyncState<PortfolioEntry[]> {
   const loading = portfolio.loading || tickers.loading,
     entries: Purchase[] = portfolio.data && !loading ? Object.values(portfolio.data) : [],
-    data = entries.map(portfolioEntry => ({ ...portfolioEntry, coinData: tickers.data && tickers.data[portfolioEntry.coinId] }));
+    data = entries.map(portfolioEntry => createPortfolioEntry(portfolioEntry, tickers.data, portfolio.currency));
   return { loading, data };
+}
+
+function createPortfolioEntry(purchase: Purchase, tickers: TickersData, currency: Currency): PortfolioEntry {
+  const ticker = tickers[purchase.coinId],
+    { name, symbol } = { ...ticker },
+    quote = ticker && ticker.quotes[currency];
+
+  return { ...purchase, name, symbol, quote };
 }
