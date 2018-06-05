@@ -1,14 +1,24 @@
 <clr-datagrid [clrDgLoading]="loading">
-  <clr-dg-column>Name</clr-dg-column>
-  <clr-dg-column>Amount</clr-dg-column>
-  <clr-dg-column>Purchase Price</clr-dg-column>
-  <clr-dg-column>Current Price</clr-dg-column>
+  <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'amount'">Amount</clr-dg-column>
+  <clr-dg-column [clrDgField]="'price'">Purchase Price</clr-dg-column>
+  <clr-dg-column [clrDgField]="'quote.price'">Current Price</clr-dg-column>
+  <clr-dg-column>Change</clr-dg-column>
+  <clr-dg-column [clrDgField]="'quote.percent_change_7d'">Activity 7d</clr-dg-column>
+  <clr-dg-column [clrDgField]="'quote.percent_change_24h'">Activity 24h</clr-dg-column>
+  <clr-dg-column [clrDgField]="'quote.percent_change_1h'">Activity 1h</clr-dg-column>
 
-  <clr-dg-row *ngFor="let entry of entries">
+  <clr-dg-row *clrDgItems="let entry of entries">
     <clr-dg-cell>{{entry.name}}</clr-dg-cell>
     <clr-dg-cell>{{entry.amount}}</clr-dg-cell>
     <clr-dg-cell>{{entry.price}}</clr-dg-cell>
     <clr-dg-cell>{{entry.quote.price}}</clr-dg-cell>
+    <clr-dg-cell>
+      <span class="badge">{{getChange(entry)}}%</span>
+    </clr-dg-cell>
+    <clr-dg-cell>{{entry.quote.percent_change_7d}}%</clr-dg-cell>
+    <clr-dg-cell>{{entry.quote.percent_change_24h}}%</clr-dg-cell>
+    <clr-dg-cell>{{entry.quote.percent_change_1h}}%</clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>{{entries.length}} Purchases</clr-dg-footer>
