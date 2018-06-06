@@ -1,5 +1,5 @@
 import { PortfolioEntry } from './../../+state/portfolio.reducer';
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'pflo-entries',
@@ -8,8 +8,15 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntriesComponent {
+  private _selected: PortfolioEntry[] = [];
+
   @Input() loading = true;
   @Input() entries: PortfolioEntry[];
-  selected: PortfolioEntry[] = [];
-  constructor() { }
+
+  get selected(): PortfolioEntry[] { return this._selected; }
+  @Input() set selected(selected: PortfolioEntry[]) {
+    this._selected = selected;
+    this.selectedChange.emit(selected);
+  }
+  @Output() selectedChange = new EventEmitter();
 }

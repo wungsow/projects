@@ -1,8 +1,8 @@
 <div class="main-container">
   <div class="content-container">
     <div class="content-area">
-      <pflo-entries *ngIf='(portfolioEntries$ | async); let entries' [entries]='entries.data' [loading]='entries.loading'></pflo-entries>
-      <pflo-actions></pflo-actions>
+      <pflo-entries *ngIf='(portfolioEntries$ | async); let entries' [entries]='entries.data' [loading]='entries.loading' [(selected)]=selected></pflo-entries>
+      <pflo-actions [selectionCount]='selected.length' (addClick)='addClick()' (editClick)='editClick()' (deleteClick)='deleteClick()'></pflo-actions>
     </div>
   </div>
 </div>

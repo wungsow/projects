@@ -2,4 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  & > div:last-child {
+    margin-right: 0;
+  }
 }
