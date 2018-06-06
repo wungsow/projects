@@ -21,7 +21,13 @@ export class TickersEffects {
 
   @Effect()
   loadTickers$ = this.dataPersistence.fetch(TickersActionTypes.LoadTickers, {
-    run: ({ payload }: LoadTickers, state: TickersState) => fromPromise(this.getTickers(payload)).pipe(map(tickers => new TickersLoaded(tickers))),
+    run: ({ payload }: LoadTickers, state: TickersState) => {
+      // Lazy load, only loa ones we don't already have
+      const alreadyLoaded = Object.keys(state.tickers.data),
+        toLoad = payload.filter(id => !alreadyLoaded.includes(id));
+
+      return fromPromise(this.getTickers(toLoad)).pipe(map(tickers => new TickersLoaded(tickers)));
+    },
 
     onError: (action: LoadTickers, error) => {
       console.error('Error', error);

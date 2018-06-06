@@ -1,9 +1,11 @@
+import { Purchase } from '@projects/cryptfolio/portfolio/src/lib/+state/portfolio.reducer';
 import { PortfolioData } from './portfolio.reducer';
 import { Action } from '@ngrx/store';
 
 export enum PortfolioActionTypes {
   LoadPortfolio = '[Portfolio] Load Data',
-  PortfolioLoaded = '[Portfolio] Data Loaded'
+  PortfolioLoaded = '[Portfolio] Data Loaded',
+  UpsertEntry = '[Portfolio] Upsert Entry'
 }
 
 export class LoadPortfolio implements Action {
@@ -16,4 +18,10 @@ export class PortfolioLoaded implements Action {
   constructor(public payload: PortfolioData = {}) { }
 }
 
-export type PortfolioActions = LoadPortfolio | PortfolioLoaded;
+export class UpsertEntry implements Action {
+  readonly type = PortfolioActionTypes.UpsertEntry;
+  constructor(public payload: Purchase) { }
+}
+
+
+export type PortfolioActions = LoadPortfolio | PortfolioLoaded | UpsertEntry;

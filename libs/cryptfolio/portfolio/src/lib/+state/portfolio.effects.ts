@@ -5,9 +5,10 @@ import { Effect } from '@ngrx/effects';
 import {
   PortfolioActionTypes,
   LoadPortfolio,
-  PortfolioLoaded
+  PortfolioLoaded,
+  UpsertEntry
 } from './portfolio.actions';
-import { PortfolioState, PortfolioData } from './portfolio.reducer';
+import { PortfolioState, PortfolioData, Purchase } from './portfolio.reducer';
 import { DataPersistence } from '@nrwl/nx';
 import { LoadCoins } from '@projects/cryptfolio/coins/src/lib/+state/coins.actions';
 import { LocalStorageService } from '@projects/shared/local-storage/src';
@@ -60,6 +61,11 @@ export class PortfolioEffects {
   @Effect()
   loadTickers$ = this.dataPersistence.fetch(PortfolioActionTypes.PortfolioLoaded, {
     run: (({ payload }: PortfolioLoaded) => new LoadTickers(Object.values(payload).map(item => item.coinId.toString())))
+  });
+
+  @Effect()
+  loadTicker$ = this.dataPersistence.fetch(PortfolioActionTypes.UpsertEntry, {
+    run: (({ payload }: UpsertEntry) => new LoadTickers([payload.coinId.toString()]))
   });
 
   constructor(

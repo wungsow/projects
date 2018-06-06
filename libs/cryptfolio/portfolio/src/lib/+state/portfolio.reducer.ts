@@ -4,6 +4,7 @@ import { createSelector } from '@ngrx/store';
 import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
 import { TickersState, Quote, TickersData } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
 import { AsyncState } from '@projects/shared/static/src/lib/+state/async-state';
+import { Utils } from '@projects/shared/static/src';
 
 /**
  * Interface for the 'Portfolio' data used in
@@ -53,6 +54,11 @@ export function portfolioReducer(
 
     case PortfolioActionTypes.LoadPortfolio: {
       return { ...state, loading: true };
+    }
+
+    case PortfolioActionTypes.UpsertEntry: {
+      const id = Utils.isDefined(action.payload.id) ? action.payload.id : Utils.getNewId(Object.keys(state.data));
+      return { ...state, data: { ...state.data, [id]: action.payload } };
     }
 
     default:

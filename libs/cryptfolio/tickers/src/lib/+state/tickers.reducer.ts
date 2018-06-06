@@ -42,7 +42,7 @@ export function tickersReducer(
   switch (action.type) {
 
     case TickersActionTypes.TickersLoaded: {
-      return { ...state, data: { ...action.payload }, loading: false };
+      return { ...state, data: { ...state.data, ...action.payload }, loading: false };
     }
 
     case TickersActionTypes.LoadTickers: {
