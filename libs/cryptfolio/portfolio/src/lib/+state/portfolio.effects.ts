@@ -25,7 +25,7 @@ export class PortfolioEffects {
     {
       run: (action: LoadPortfolio, state: PortfolioState) => {
         const storedPortfolio = this.localStrorageService.getItem<PortfolioData>(this.storageKey);
-        return new PortfolioLoaded(storedPortfolio);
+        return new PortfolioLoaded(storedPortfolio || {});
       },
 
       onError: (action: LoadPortfolio, error) => {
@@ -53,6 +53,11 @@ export class PortfolioEffects {
       return new LoadTickers([payload.coinId.toString()]);
     }
   });
+
+  @Effect()
+  deleteEntry$ = this.dataPersistence.fetch(PortfolioActionTypes.DeleteEntry, {
+    run: ({ payload }: UpsertEntry, state: PortfolioState) => this.localStrorageService.setItem(this.storageKey, state.portfolio.data)
+  })
 
   constructor(
     private dataPersistence: DataPersistence<PortfolioState>,

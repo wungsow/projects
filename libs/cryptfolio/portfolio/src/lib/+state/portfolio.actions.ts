@@ -5,7 +5,8 @@ import { Action } from '@ngrx/store';
 export enum PortfolioActionTypes {
   LoadPortfolio = '[Portfolio] Load Data',
   PortfolioLoaded = '[Portfolio] Data Loaded',
-  UpsertEntry = '[Portfolio] Upsert Entry'
+  UpsertEntry = '[Portfolio] Upsert Entry',
+  DeleteEntry = '[Portfolio] Delete Entry'
 }
 
 export class LoadPortfolio implements Action {
@@ -23,5 +24,9 @@ export class UpsertEntry implements Action {
   constructor(public payload: Purchase) { }
 }
 
+export class DeleteEntry implements Action {
+  readonly type = PortfolioActionTypes.DeleteEntry;
+  constructor(public payload: number) { }
+}
 
-export type PortfolioActions = LoadPortfolio | PortfolioLoaded | UpsertEntry;
+export type PortfolioActions = LoadPortfolio | PortfolioLoaded | UpsertEntry | DeleteEntry;

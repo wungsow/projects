@@ -58,7 +58,14 @@ export function portfolioReducer(
 
     case PortfolioActionTypes.UpsertEntry: {
       const id = Utils.isDefined(action.payload.id) ? action.payload.id : Utils.getNewId(Object.keys(state.data));
+      action.payload.id = id;
       return { ...state, data: { ...state.data, [id]: action.payload } };
+    }
+
+    case PortfolioActionTypes.DeleteEntry: {
+      const deletedState = { ...state.data };
+      delete deletedState[action.payload];
+      return { ...state, data: { ...deletedState } };
     }
 
     default:

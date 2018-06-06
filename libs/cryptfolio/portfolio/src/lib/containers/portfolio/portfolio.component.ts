@@ -1,4 +1,4 @@
-import { UpsertEntry } from './../../+state/portfolio.actions';
+import { UpsertEntry, DeleteEntry } from './../../+state/portfolio.actions';
 import { PortfolioState, portfolioEntries, PortfolioEntry, Purchase } from './../../+state/portfolio.reducer';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -35,7 +35,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   deleteSubmit() {
-
+    this.store.dispatch(new DeleteEntry(this.selected[0].id));
   }
 
   editClick() {
