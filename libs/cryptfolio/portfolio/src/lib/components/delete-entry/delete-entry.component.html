@@ -1,0 +1,10 @@
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">Delete</h3>
+  <div class="modal-body">
+    <p>Are you sure you wish to delete the selected entries?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="close()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="submit()">Delete</button>
+  </div>
+</clr-modal>

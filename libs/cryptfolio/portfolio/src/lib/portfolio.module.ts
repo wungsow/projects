@@ -20,6 +20,7 @@ import { CoinComponent } from './components/coin/coin.component';
 import { ActionsComponent } from './components/actions/actions.component';
 import { AddEditEntryComponent } from './components/add-edit-entry/add-edit-entry.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteEntryComponent } from './components/delete-entry/delete-entry.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,6 +43,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CoinmarketcapService,
     { provide: CoinsService, useExisting: CoinmarketcapService },
     { provide: TickersService, useExisting: CoinmarketcapService }],
-  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent, CoinComponent, ActionsComponent, AddEditEntryComponent]
+  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent, CoinComponent, ActionsComponent, AddEditEntryComponent, DeleteEntryComponent]
 })
 export class PortfolioModule { }

@@ -14,7 +14,8 @@ export class PortfolioComponent implements OnInit {
   coinList$ = this.store.select(portfolio => portfolio.coins.data);
   selected: PortfolioEntry[] = [];
 
-  addEdit = false;
+  showAddEdit = false;
+  showDelete = false;
 
   constructor(private store: Store<PortfolioState>) { }
 
@@ -22,7 +23,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   addClick() {
-    this.addEdit = true;
+    this.showAddEdit = true;
   }
 
   addSubmit(purchase: Purchase) {
@@ -30,6 +31,10 @@ export class PortfolioComponent implements OnInit {
   }
 
   deleteClick() {
+    this.showDelete = true;
+  }
+
+  deleteSubmit() {
 
   }
 

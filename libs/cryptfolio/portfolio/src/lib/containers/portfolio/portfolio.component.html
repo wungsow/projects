@@ -3,7 +3,8 @@
     <div class="content-area">
       <pflo-entries *ngIf='(portfolioEntries$ | async); let entries' [entries]='entries.data' [loading]='entries.loading' [(selected)]=selected></pflo-entries>
       <pflo-actions [selectionCount]='selected.length' (addClick)='addClick()' (editClick)='editClick()' (deleteClick)='deleteClick()'></pflo-actions>
-      <pflo-add-edit-entry [(open)]=addEdit [coins]="coinList$ | async" (entrySubmitted)="addSubmit($event)"></pflo-add-edit-entry>
+      <pflo-add-edit-entry [(open)]=showAddEdit [coins]="coinList$ | async" (entrySubmitted)="addSubmit($event)"></pflo-add-edit-entry>
+      <pflo-delete-entry [(open)]=showDelete (deleteSubmitted)="deleteSubmit()"></pflo-delete-entry>
     </div>
   </div>
 </div>

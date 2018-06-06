@@ -1,3 +1,4 @@
+import { DialogBase } from '../dialogs/dialog.base';
 import { Coin } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { PortfolioEntry, Purchase } from '@projects/cryptfolio/portfolio/src/lib/+state/portfolio.reducer';
@@ -8,8 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './add-edit-entry.component.html',
   styleUrls: ['./add-edit-entry.component.scss']
 })
-export class AddEditEntryComponent {
-  private openValue = false;
+export class AddEditEntryComponent extends DialogBase {
 
   formGroup = new FormGroup({
     coinId: new FormControl('', Validators.required),
@@ -17,14 +17,6 @@ export class AddEditEntryComponent {
     price: new FormControl('', Validators.required),
     id: new FormControl('')
   });
-
-  get open() { return this.openValue; }
-  @Input()
-  set open(open: boolean) {
-    this.openValue = open;
-    this.openChange.emit(this.openValue);
-  }
-  @Output() openChange = new EventEmitter<boolean>();
 
   @Input() coins: Coin[] = [];
   @Input() set purchase(purchase: Purchase) {
@@ -37,10 +29,5 @@ export class AddEditEntryComponent {
   submit() {
     this.entrySubmitted.emit(this.formGroup.value);
     this.close();
-  }
-
-  close() {
-    this.formGroup.reset();
-    this.open = false;
   }
 }
