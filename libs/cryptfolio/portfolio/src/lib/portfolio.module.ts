@@ -18,6 +18,8 @@ import { ClarityModule } from '@clr/angular';
 import { PercentageComponent } from './components/percentage/percentage.component';
 import { CoinComponent } from './components/coin/coin.component';
 import { ActionsComponent } from './components/actions/actions.component';
+import { AddEditEntryComponent } from './components/add-edit-entry/add-edit-entry.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,12 +35,13 @@ import { ActionsComponent } from './components/actions/actions.component';
     HttpClientModule,
     CoinsModule,
     TickersModule,
-    ClarityModule
+    ClarityModule,
+    ReactiveFormsModule
   ],
   providers: [PortfolioEffects,
     CoinmarketcapService,
     { provide: CoinsService, useExisting: CoinmarketcapService },
     { provide: TickersService, useExisting: CoinmarketcapService }],
-  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent, CoinComponent, ActionsComponent]
+  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent, CoinComponent, ActionsComponent, AddEditEntryComponent]
 })
 export class PortfolioModule { }

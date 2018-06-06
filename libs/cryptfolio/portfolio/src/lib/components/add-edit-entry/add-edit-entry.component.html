@@ -1,0 +1,33 @@
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">Add</h3>
+  <div class="modal-body">
+    <form class="form" [formGroup]="formGroup" (ngSubmit)="submit()">
+      <section class="form-block">
+        <div class="form-group">
+          <label for="amount" class="required">Amount</label>
+          <label for="amount" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="formGroup.get('amount').invalid
+                            && (formGroup.get('amount').dirty || formGroup.get('amount').touched)">
+            <input id="amount" type="number" formControlName="amount">
+            <span class="tooltip-content">
+              Amount is required.
+            </span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="price" class="required">Price</label>
+          <label for="price" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="formGroup.get('price').invalid
+                              && (formGroup.get('price').dirty || formGroup.get('price').touched)">
+            <input id="price" type="number" formControlName="price">
+            <span class="tooltip-content">
+              Price is required.
+            </span>
+          </label>
+        </div>
+      </section>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="close()">Cancel</button>
+        <button class="btn btn-primary">Add</button>
+      </div>
+    </form>
+  </div>
+</clr-modal>

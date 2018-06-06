@@ -12,13 +12,15 @@ export class PortfolioComponent implements OnInit {
   portfolioEntries$ = this.store.select(portfolioEntries);
   selected: PortfolioEntry[] = [];
 
+  addEdit = false;
+
   constructor(private store: Store<PortfolioState>) { }
 
   ngOnInit() {
   }
 
   addClick() {
-
+    this.addEdit = true;
   }
 
   deleteClick() {

@@ -3,6 +3,7 @@
     <div class="content-area">
       <pflo-entries *ngIf='(portfolioEntries$ | async); let entries' [entries]='entries.data' [loading]='entries.loading' [(selected)]=selected></pflo-entries>
       <pflo-actions [selectionCount]='selected.length' (addClick)='addClick()' (editClick)='editClick()' (deleteClick)='deleteClick()'></pflo-actions>
+      <pflo-add-edit-entry [(open)]=addEdit></pflo-add-edit-entry>
     </div>
   </div>
 </div>
