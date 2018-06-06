@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 export class PortfolioComponent implements OnInit {
 
   portfolioEntries$ = this.store.select(portfolioEntries);
+  coinList$ = this.store.select(portfolio => portfolio.coins.data);
   selected: PortfolioEntry[] = [];
 
   addEdit = false;
