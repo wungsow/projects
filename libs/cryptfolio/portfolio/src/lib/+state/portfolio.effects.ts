@@ -24,24 +24,7 @@ export class PortfolioEffects {
     PortfolioActionTypes.LoadPortfolio,
     {
       run: (action: LoadPortfolio, state: PortfolioState) => {
-        // TODO Remove-----------------------------------------------------------------------------
-        this.localStrorageService.setItem(this.storageKey, {
-          1: {
-            amount: 2,
-            coinId: 1,
-            id: 1,
-            price: 4000
-          },
-          2: {
-            amount: 2,
-            coinId: 2757,
-            id: 1,
-            price: 4000
-          }
-        });
-        // ---------------------------------------------------------------------------------------
         const storedPortfolio = this.localStrorageService.getItem<PortfolioData>(this.storageKey);
-        // TODO get from local storage
         return new PortfolioLoaded(storedPortfolio);
       },
 
@@ -65,7 +48,10 @@ export class PortfolioEffects {
 
   @Effect()
   loadTicker$ = this.dataPersistence.fetch(PortfolioActionTypes.UpsertEntry, {
-    run: (({ payload }: UpsertEntry) => new LoadTickers([payload.coinId.toString()]))
+    run: ({ payload }: UpsertEntry, state: PortfolioState) => {
+      this.localStrorageService.setItem(this.storageKey, state.portfolio.data);
+      return new LoadTickers([payload.coinId.toString()]);
+    }
   });
 
   constructor(
