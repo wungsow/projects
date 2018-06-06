@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { DialogBase } from '@projects/cryptfolio/portfolio/src/lib/components/dialogs/dialog.base';
+import { DialogBase } from '../dialog.base';
 
 @Component({
   selector: 'pflo-delete-entry',

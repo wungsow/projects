@@ -1,4 +1,4 @@
-import { DialogBase } from '../dialogs/dialog.base';
+import { DialogBase } from '../dialog.base';
 import { Coin } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { PortfolioEntry, Purchase } from '@projects/cryptfolio/portfolio/src/lib/+state/portfolio.reducer';
