@@ -13,6 +13,8 @@ export class AddEditEntryComponent extends DialogBase {
 
   get desc() { return this.formGroup.get('id').value ? 'Update' : 'Add'; }
 
+  get amountControl() { return this.formGroup.get('amount'); }
+
   formGroup = new FormGroup({
     coinId: new FormControl('', Validators.required),
     amount: new FormControl('', Validators.required),

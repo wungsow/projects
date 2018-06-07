@@ -33,6 +33,9 @@
       ],
       "@projects/shared/static": [
         "libs/shared/static/src/index.ts"
+      ],
+      "@projects/shared/clr-components": [
+        "libs/shared/clr-components/src/index.ts"
       ]
     }
   },

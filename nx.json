@@ -21,6 +21,9 @@
     },
     "shared-static": {
       "tags": []
+    },
+    "clr-components": {
+      "tags": []
     }
   }
 }

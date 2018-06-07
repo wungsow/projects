@@ -20,9 +20,9 @@
         </div>
         <div class="form-group">
           <label for="amount" class="required">Amount</label>
-          <label for="amount" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="formGroup.get('amount').invalid
-                            && (formGroup.get('amount').dirty || formGroup.get('amount').touched)">
-            <input id="amount" type="number" formControlName="amount">
+          <label for="amount" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="amountControl.invalid
+                            && (amountControl.dirty || amountControl.touched)">
+            <input id="amount" type="number" [formControl]="amountControl">
             <span class="tooltip-content">
               Amount is required.
             </span>

@@ -11,7 +11,7 @@ export class EntriesComponent {
   private _selected: PortfolioEntry;
 
   @Input() loading = true;
-  @Input() entries: PortfolioEntry;
+  @Input() entries: PortfolioEntry[];
 
   get selected(): PortfolioEntry { return this._selected; }
   @Input() set selected(selected: PortfolioEntry) {

@@ -21,6 +21,7 @@ import { ActionsComponent } from './components/actions/actions.component';
 import { AddEditEntryComponent } from './components/dialogs/add-edit-entry/add-edit-entry.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteEntryComponent } from './components/dialogs/delete-entry/delete-entry.component';
+import { ClrComponentsModule } from '@projects/shared/clr-components/src';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +38,8 @@ import { DeleteEntryComponent } from './components/dialogs/delete-entry/delete-e
     CoinsModule,
     TickersModule,
     ClarityModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClrComponentsModule
   ],
   providers: [PortfolioEffects,
     CoinmarketcapService,
