@@ -8,12 +8,12 @@ export enum TickersActionTypes {
 
 export class LoadTickers implements Action {
   readonly type = TickersActionTypes.LoadTickers;
-  constructor(public payload: string[]) { }
+  constructor(public ids: string[]) { }
 }
 
 export class TickersLoaded implements Action {
   readonly type = TickersActionTypes.TickersLoaded;
-  constructor(public payload: { [id: string]: Ticker }) { }
+  constructor(public tickers: Ticker[]) { }
 }
 
 export type TickersActions = LoadTickers | TickersLoaded;

@@ -8,12 +8,13 @@ import {
   PortfolioLoaded,
   UpsertEntry
 } from './portfolio.actions';
-import { PortfolioState, PortfolioData, Purchase } from './portfolio.reducer';
+import { PortfolioState, Purchase } from './portfolio.reducer';
 import { DataPersistence } from '@nrwl/nx';
 import { LoadCoins } from '@projects/cryptfolio/coins/src/lib/+state/coins.actions';
 import { LocalStorageService } from '@projects/shared/local-storage/src';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { LoadTickers } from '@projects/cryptfolio/tickers/src';
+import { Dictionary } from '@ngrx/entity/src/models';
 
 @Injectable()
 export class PortfolioEffects {
@@ -24,7 +25,7 @@ export class PortfolioEffects {
     PortfolioActionTypes.LoadPortfolio,
     {
       run: (action: LoadPortfolio, state: PortfolioState) => {
-        const storedPortfolio = this.localStrorageService.getItem<PortfolioData>(this.storageKey);
+        const storedPortfolio = this.localStrorageService.getItem<Dictionary<Purchase>>(this.storageKey);
         return new PortfolioLoaded(Object.values(storedPortfolio));
       },
 

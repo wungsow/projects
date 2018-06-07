@@ -1,6 +1,5 @@
 import { EntityState } from '@ngrx/entity';
 import { Purchase } from '@projects/cryptfolio/portfolio/src/lib/+state/portfolio.reducer';
-import { PortfolioData } from './portfolio.reducer';
 import { Action } from '@ngrx/store';
 
 export enum PortfolioActionTypes {

@@ -2,20 +2,18 @@ import { Currency } from './curency.enum';
 import { CoinsState } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
 import { createSelector } from '@ngrx/store';
 import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
-import { TickersState, Quote, TickersData } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
+import { TickersState, Quote, Tickers } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
 import { AsyncState } from '@projects/shared/static/src/lib/+state/async-state';
 import { Utils } from '@projects/shared/static/src';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Dictionary } from '@ngrx/entity/src/models';
+import { Ticker } from '@projects/cryptfolio/portfolio/src/lib/services/coinmarketcap.service';
 
 /**
  * Interface for the 'Portfolio' data used in
  *  - PortfolioState, and
  *  - portfolioReducer
  */
-export interface PortfolioData {
-  [id: string]: Purchase;
-}
-
 export interface Purchase {
   id: number;
   coinId: number;
@@ -83,14 +81,14 @@ export const {
   selectTotal,
 } = adapter.getSelectors();
 
-function getPortfolioEntries(portfolio: Portfolio, tickers: AsyncState<TickersData>): AsyncState<PortfolioEntry[]> {
+function getPortfolioEntries(portfolio: Portfolio, tickers: Tickers): AsyncState<PortfolioEntry[]> {
   const loading = portfolio.loading || tickers.loading,
     entries: Purchase[] = portfolio.entities && !loading ? Object.values(portfolio.entities) : [],
-    data = entries.map(portfolioEntry => createPortfolioEntry(portfolioEntry, tickers.data, portfolio.currency));
+    data = entries.map(portfolioEntry => createPortfolioEntry(portfolioEntry, tickers.entities, portfolio.currency));
   return { loading, data };
 }
 
-function createPortfolioEntry(purchase: Purchase, tickers: TickersData, currency: Currency): PortfolioEntry {
+function createPortfolioEntry(purchase: Purchase, tickers: Dictionary<Ticker>, currency: Currency): PortfolioEntry {
   const ticker = tickers[purchase.coinId],
     { name, symbol } = { ...ticker },
     quote = ticker && ticker.quotes[currency],
