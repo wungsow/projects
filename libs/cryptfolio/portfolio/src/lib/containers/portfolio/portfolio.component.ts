@@ -12,10 +12,11 @@ export class PortfolioComponent implements OnInit {
 
   portfolioEntries$ = this.store.select(portfolioEntries);
   coinList$ = this.store.select(portfolio => portfolio.coins.data);
-  selected: PortfolioEntry[] = [];
+  selected: PortfolioEntry;
 
   showAddEdit = false;
   showDelete = false;
+  purchaseToEdit: Purchase;
 
   constructor(private store: Store<PortfolioState>) { }
 
@@ -35,11 +36,12 @@ export class PortfolioComponent implements OnInit {
   }
 
   deleteSubmit() {
-    this.store.dispatch(new DeleteEntry(this.selected[0].id));
+    this.store.dispatch(new DeleteEntry(this.selected.id));
   }
 
   editClick() {
-
+    this.purchaseToEdit = this.selected;
+    this.showAddEdit = true;
   }
 
 }

@@ -5,6 +5,7 @@ import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
 import { TickersState, Quote, TickersData } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
 import { AsyncState } from '@projects/shared/static/src/lib/+state/async-state';
 import { Utils } from '@projects/shared/static/src';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 /**
  * Interface for the 'Portfolio' data used in
@@ -30,8 +31,9 @@ export interface PortfolioState extends CoinsState, TickersState {
   readonly portfolio: Portfolio;
 }
 
-export interface Portfolio extends AsyncState<PortfolioData> {
-  currency: Currency
+export interface Portfolio extends EntityState<Purchase> {
+  currency: Currency;
+  loading: boolean;
 }
 
 export interface PortfolioEntry extends Purchase {
@@ -41,7 +43,9 @@ export interface PortfolioEntry extends Purchase {
   change: number;
 }
 
-export const initialState: Portfolio = { loading: false, data: {}, currency: Currency.USD };
+const adapter: EntityAdapter<Purchase> = createEntityAdapter<Purchase>();
+
+export const initialState: Portfolio = adapter.getInitialState({ loading: false, currency: Currency.USD });
 
 export function portfolioReducer(
   state = initialState,
@@ -49,7 +53,7 @@ export function portfolioReducer(
 ): Portfolio {
   switch (action.type) {
     case PortfolioActionTypes.PortfolioLoaded: {
-      return { ...state, data: { ...action.payload }, loading: false };
+      return adapter.addAll(action.purchases, { ...state, loading: false });
     }
 
     case PortfolioActionTypes.LoadPortfolio: {
@@ -57,15 +61,12 @@ export function portfolioReducer(
     }
 
     case PortfolioActionTypes.UpsertEntry: {
-      const id = Utils.isDefined(action.payload.id) ? action.payload.id : Utils.getNewId(Object.keys(state.data));
-      action.payload.id = id;
-      return { ...state, data: { ...state.data, [id]: action.payload } };
+      const id = Utils.isDefined(action.purchase.id) ? action.purchase.id : Utils.getNewId(state.ids);
+      return adapter.upsertMany([{ id, changes: action.purchase }], state);
     }
 
     case PortfolioActionTypes.DeleteEntry: {
-      const deletedState = { ...state.data };
-      delete deletedState[action.payload];
-      return { ...state, data: { ...deletedState } };
+      return adapter.removeOne(action.id, state)
     }
 
     default:
@@ -75,9 +76,16 @@ export function portfolioReducer(
 
 export const portfolioEntries = createSelector([(state: PortfolioState) => state.portfolio, (state: PortfolioState) => state.tickers], getPortfolioEntries);
 
+export const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal,
+} = adapter.getSelectors();
+
 function getPortfolioEntries(portfolio: Portfolio, tickers: AsyncState<TickersData>): AsyncState<PortfolioEntry[]> {
   const loading = portfolio.loading || tickers.loading,
-    entries: Purchase[] = portfolio.data && !loading ? Object.values(portfolio.data) : [],
+    entries: Purchase[] = portfolio.entities && !loading ? Object.values(portfolio.entities) : [],
     data = entries.map(portfolioEntry => createPortfolioEntry(portfolioEntry, tickers.data, portfolio.currency));
   return { loading, data };
 }

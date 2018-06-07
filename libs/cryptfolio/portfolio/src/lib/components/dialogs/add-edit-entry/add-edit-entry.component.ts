@@ -20,7 +20,8 @@ export class AddEditEntryComponent extends DialogBase {
 
   @Input() coins: Coin[] = [];
   @Input() set purchase(purchase: Purchase) {
-    this.formGroup.patchValue(purchase);
+    if (purchase)
+      this.formGroup.patchValue(purchase);
   }
 
   @Output() entrySubmitted = new EventEmitter<Purchase>();
@@ -29,5 +30,10 @@ export class AddEditEntryComponent extends DialogBase {
   submit() {
     this.entrySubmitted.emit(this.formGroup.value);
     this.close();
+  }
+
+  close() {
+    super.close();
+    this.formGroup.reset();
   }
 }

@@ -8,13 +8,13 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntriesComponent {
-  private _selected: PortfolioEntry[] = [];
+  private _selected: PortfolioEntry;
 
   @Input() loading = true;
-  @Input() entries: PortfolioEntry[];
+  @Input() entries: PortfolioEntry;
 
-  get selected(): PortfolioEntry[] { return this._selected; }
-  @Input() set selected(selected: PortfolioEntry[]) {
+  get selected(): PortfolioEntry { return this._selected; }
+  @Input() set selected(selected: PortfolioEntry) {
     this._selected = selected;
     this.selectedChange.emit(selected);
   }
