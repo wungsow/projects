@@ -1,5 +1,5 @@
 import { UpsertEntry, DeleteEntry } from './../../+state/portfolio.actions';
-import { PortfolioState, portfolioEntries, PortfolioEntry, Purchase } from './../../+state/portfolio.reducer';
+import { PortfolioState, PortfolioEntry, Purchase, portfolioEntries, loadingPortfolioEntries } from './../../+state/portfolio.reducer';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -9,11 +9,12 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./portfolio.component.scss']
 })
 export class PortfolioComponent implements OnInit {
-
-  portfolioEntries$ = this.store.select(portfolioEntries);
+  // Store data
   coinList$ = this.store.select(portfolio => portfolio.coins.data);
-  selected: PortfolioEntry;
+  portfolioEntries$ = this.store.select(portfolioEntries);
+  entriesLoading$ = this.store.select(loadingPortfolioEntries);
 
+  selected: PortfolioEntry;
   showAddEdit = false;
   showDelete = false;
   purchaseToEdit: Purchase;
@@ -28,6 +29,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   addSubmit(purchase: Purchase) {
+    this.purchaseToEdit = null;
     this.store.dispatch(new UpsertEntry(purchase));
   }
 

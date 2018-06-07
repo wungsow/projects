@@ -57,3 +57,10 @@ export function tickersReducer(
       return state;
   }
 }
+
+export const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal,
+} = adapter.getSelectors();

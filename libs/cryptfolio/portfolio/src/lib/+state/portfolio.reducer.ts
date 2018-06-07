@@ -2,7 +2,7 @@ import { Currency } from './curency.enum';
 import { CoinsState } from '@projects/cryptfolio/coins/src/lib/+state/coins.reducer';
 import { createSelector } from '@ngrx/store';
 import { PortfolioActions, PortfolioActionTypes } from './portfolio.actions';
-import { TickersState, Quote, Tickers } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
+import { TickersState, Quote, Tickers, selectEntities as selectTickers } from '@projects/cryptfolio/tickers/src/lib/+state/tickers.reducer';
 import { AsyncState } from '@projects/shared/static/src/lib/+state/async-state';
 import { Utils } from '@projects/shared/static/src';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
@@ -72,8 +72,6 @@ export function portfolioReducer(
   }
 }
 
-export const portfolioEntries = createSelector([(state: PortfolioState) => state.portfolio, (state: PortfolioState) => state.tickers], getPortfolioEntries);
-
 export const {
   selectIds,
   selectEntities,
@@ -81,12 +79,19 @@ export const {
   selectTotal,
 } = adapter.getSelectors();
 
-function getPortfolioEntries(portfolio: Portfolio, tickers: Tickers): AsyncState<PortfolioEntry[]> {
-  const loading = portfolio.loading || tickers.loading,
-    entries: Purchase[] = portfolio.entities && !loading ? Object.values(portfolio.entities) : [],
-    data = entries.map(portfolioEntry => createPortfolioEntry(portfolioEntry, tickers.entities, portfolio.currency));
-  return { loading, data };
-}
+const getPortfolioState = (state: PortfolioState) => state.portfolio;
+const getTickersState = (state: PortfolioState) => state.tickers;
+const getCurrency = createSelector([getPortfolioState], portfolio => portfolio.currency);
+const getLoading = createSelector([getPortfolioState], portfolio => portfolio.loading);
+const getPurchases = createSelector([getPortfolioState], selectEntities);
+const getTickers = createSelector([getTickersState], selectTickers);
+const getTickersLoading = createSelector([getTickersState], state => state.loading);
+
+export const portfolioEntries = createSelector([getPurchases, getTickers, getCurrency], (purchases, tickers, currency) => {
+  return Object.values(purchases).map(purchase => createPortfolioEntry(purchase, tickers, currency)).filter(item => item.name);
+});
+
+export const loadingPortfolioEntries = createSelector([getLoading, getTickersLoading], (purchaseLoading, tickersLoading) => tickersLoading || purchaseLoading);
 
 function createPortfolioEntry(purchase: Purchase, tickers: Dictionary<Ticker>, currency: Currency): PortfolioEntry {
   const ticker = tickers[purchase.coinId],
@@ -99,6 +104,5 @@ function createPortfolioEntry(purchase: Purchase, tickers: Dictionary<Ticker>, c
 
 function getChange(price, quote: Quote): number {
   const currentPrice = quote && quote.price;
-
   return price && currentPrice ? Math.round(100 * (currentPrice - price) / price) : null;
 }
