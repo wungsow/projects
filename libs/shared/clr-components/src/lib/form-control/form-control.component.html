@@ -1,0 +1,10 @@
+<div class="form-group">
+  <label [attr.for]="controlName" class="required">{{label}}</label>
+  <label [attr.for]="controlName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="control.invalid
+                        && (control.dirty || control.touched)">
+    <ng-content></ng-content>
+    <span class="tooltip-content">
+      {{validationMsg}}
+    </span>
+  </label>
+</div>

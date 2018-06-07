@@ -261,6 +261,34 @@
           }
         }
       }
+    },
+    "clr-components": {
+      "root": "libs/shared/clr-components",
+      "sourceRoot": "libs/shared/clr-components/src",
+      "projectType": "library",
+      "prefix": "clr",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/clr-components/src/test.ts",
+            "tsConfig": "libs/shared/clr-components/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/clr-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/clr-components/tsconfig.lib.json",
+              "libs/shared/clr-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

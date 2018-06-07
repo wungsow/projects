@@ -3,41 +3,21 @@
   <div class="modal-body">
     <form class="form" [formGroup]="formGroup" (ngSubmit)="submit()">
       <section class="form-block">
-        <div class="form-group">
-          <label for="coinId" class="required">Coin</label>
-          <label for="coinId" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="formGroup.get('coinId').invalid
-                            && (formGroup.get('coinId').dirty || formGroup.get('coinId').touched)">
-            <div class="select">
-              <select id="coinId" formControlName="coinId">
-                <option *ngFor="let coin of coins" [ngValue]=coin.id>{{coin.name}} ({{coin.symbol}})</option>
-              </select>
 
-            </div>
-            <span class="tooltip-content">
-              Coin is required.
-            </span>
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="amount" class="required">Amount</label>
-          <label for="amount" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="amountControl.invalid
-                            && (amountControl.dirty || amountControl.touched)">
-            <input id="amount" type="number" [formControl]="amountControl">
-            <span class="tooltip-content">
-              Amount is required.
-            </span>
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="price" class="required">Price</label>
-          <label for="price" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [class.invalid]="formGroup.get('price').invalid
-                              && (formGroup.get('price').dirty || formGroup.get('price').touched)">
-            <input id="price" type="number" formControlName="price">
-            <span class="tooltip-content">
-              Price is required.
-            </span>
-          </label>
-        </div>
+        <clr-form-control [control]="formGroup.get('coinId')" [validationMsg]="'Coin is required.'" [label]="'Coin'">
+          <div class="select">
+            <select id="coinId" formControlName="coinId">
+              <option *ngFor="let coin of coins" [ngValue]=coin.id>{{coin.name}} ({{coin.symbol}})</option>
+            </select>
+          </div>
+        </clr-form-control>
+
+        <clr-form-control [control]="formGroup.get('amount')" [validationMsg]="'Amount is required.'" [label]="'Amount'">
+          <input id="amount" type="number" formControlName="amount" />
+        </clr-form-control>
+        <clr-form-control [control]="formGroup.get('price')" [validationMsg]="'Price is required.'" [label]="'Price'">
+          <input id="price" type="number" formControlName="price" />
+        </clr-form-control>
       </section>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" (click)="close()">Cancel</button>
