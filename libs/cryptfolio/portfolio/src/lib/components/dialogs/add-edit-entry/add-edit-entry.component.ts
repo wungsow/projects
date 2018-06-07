@@ -11,6 +11,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AddEditEntryComponent extends DialogBase {
 
+  get desc() { return this.formGroup.get('id').value ? 'Update' : 'Add'; }
+
   formGroup = new FormGroup({
     coinId: new FormControl('', Validators.required),
     amount: new FormControl('', Validators.required),
@@ -20,8 +22,10 @@ export class AddEditEntryComponent extends DialogBase {
 
   @Input() coins: Coin[] = [];
   @Input() set purchase(purchase: Purchase) {
-    if (purchase)
+    this.formGroup.reset();
+    if (purchase) {
       this.formGroup.patchValue(purchase);
+    }
   }
 
   @Output() entrySubmitted = new EventEmitter<Purchase>();
@@ -29,11 +33,7 @@ export class AddEditEntryComponent extends DialogBase {
 
   submit() {
     this.entrySubmitted.emit(this.formGroup.value);
-    this.close();
-  }
-
-  close() {
-    super.close();
     this.formGroup.reset();
+    this.close();
   }
 }

@@ -8,7 +8,7 @@
   <clr-dg-column [clrDgField]="'quote.percent_change_24h'">Activity 24h</clr-dg-column>
   <clr-dg-column [clrDgField]="'quote.percent_change_1h'">Activity 1h</clr-dg-column>
 
-  <clr-dg-row *clrDgItems="let entry of entries" [clrDgItem]="entry">
+  <clr-dg-row *clrDgItems="let entry of entries; trackBy: trackEntry" [clrDgItem]="entry">
     <clr-dg-cell>
       <pflo-coin [coin]=entry></pflo-coin>
     </clr-dg-cell>

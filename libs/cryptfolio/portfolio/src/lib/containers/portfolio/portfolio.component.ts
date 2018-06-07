@@ -24,12 +24,12 @@ export class PortfolioComponent implements OnInit {
   ngOnInit() {
   }
 
-  addClick() {
+  addEditClick(purchase) {
+    this.purchaseToEdit = purchase ? purchase : null;
     this.showAddEdit = true;
   }
 
   addSubmit(purchase: Purchase) {
-    this.purchaseToEdit = null;
     this.store.dispatch(new UpsertEntry(purchase));
   }
 
@@ -40,10 +40,4 @@ export class PortfolioComponent implements OnInit {
   deleteSubmit() {
     this.store.dispatch(new DeleteEntry(this.selected.id));
   }
-
-  editClick() {
-    this.purchaseToEdit = this.selected;
-    this.showAddEdit = true;
-  }
-
 }

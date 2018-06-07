@@ -1,5 +1,5 @@
 import { PortfolioEntry } from './../../+state/portfolio.reducer';
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/core';
 
 @Component({
   selector: 'pflo-entries',
@@ -19,4 +19,8 @@ export class EntriesComponent {
     this.selectedChange.emit(selected);
   }
   @Output() selectedChange = new EventEmitter();
+
+  trackEntry(index, entry) {
+    return entry.id;
+  }
 }

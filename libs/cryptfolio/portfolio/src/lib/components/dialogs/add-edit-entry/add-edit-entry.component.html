@@ -1,5 +1,5 @@
 <clr-modal [(clrModalOpen)]="open">
-  <h3 class="modal-title">Add</h3>
+  <h3 class="modal-title">{{desc}}</h3>
   <div class="modal-body">
     <form class="form" [formGroup]="formGroup" (ngSubmit)="submit()">
       <section class="form-block">
@@ -41,7 +41,7 @@
       </section>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" (click)="close()">Cancel</button>
-        <button class="btn btn-primary" [disabled]=formGroup.invalid>Add</button>
+        <button class="btn btn-primary" [disabled]=formGroup.invalid>{{desc}}</button>
       </div>
     </form>
   </div>
