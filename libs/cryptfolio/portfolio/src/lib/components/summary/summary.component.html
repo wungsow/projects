@@ -1,4 +1,16 @@
-<div *ngIf=summary>
-  Invested: {{summary.invested | currency : 'USD'}} Current value: {{summary.currentValue | currency : 'USD'}} Change:
-  <pflo-percentage [value]=summary.change></pflo-percentage>
+<div *ngIf=summary class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        Summary
+      </div>
+      <div class="card-block row">
+        <div class="col-md-4">Invested: {{summary.invested | currency : 'USD'}}</div>
+        <div class="col-md-4">Current value: {{summary.currentValue | currency : 'USD'}} </div>
+        <div class="col-md-4">Change: {{summary.currentValue - summary.invested | currency : 'USD'}}
+          <pflo-percentage [value]=summary.change></pflo-percentage>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
