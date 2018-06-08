@@ -39,6 +39,13 @@ export interface PortfolioEntry extends Purchase {
   symbol: string;
   quote: Quote;
   change: number;
+  currentValue: number;
+}
+
+export interface PortfolioSummary {
+  invested: number;
+  currentValue: number;
+  change: number;
 }
 
 const adapter: EntityAdapter<Purchase> = createEntityAdapter<Purchase>();
@@ -91,15 +98,24 @@ export const portfolioEntries = createSelector([getPurchases, getTickers, getCur
   return Object.values(purchases).map(purchase => createPortfolioEntry(purchase, tickers, currency)).filter(item => item.name);
 });
 
+export const portfolioSummary = createSelector([portfolioEntries], (entries): PortfolioSummary => {
+  const invested = entries.map(purchase => purchase.price).reduce((acc, value) => acc + value, 0),
+    currentValue = entries.map(purchase => purchase.currentValue).reduce((acc, value) => acc + value, 0),
+    change = currentValue && invested ? Math.round(100 * ((currentValue - invested) / invested)) : 0;
+
+  return { invested, change, currentValue };
+});
+
 export const loadingPortfolioEntries = createSelector([getLoading, getTickersLoading], (purchaseLoading, tickersLoading) => tickersLoading || purchaseLoading);
 
 function createPortfolioEntry(purchase: Purchase, tickers: Dictionary<Ticker>, currency: Currency): PortfolioEntry {
   const ticker = tickers[purchase.coinId],
     { name, symbol } = { ...ticker },
     quote = ticker && ticker.quotes[currency],
+    currentValue = quote && quote.price ? quote.price * purchase.amount : 0,
     change = getChange(purchase.price, quote);
 
-  return { ...purchase, name, symbol, quote, change };
+  return { ...purchase, name, symbol, quote, change, currentValue };
 }
 
 function getChange(price, quote: Quote): number {

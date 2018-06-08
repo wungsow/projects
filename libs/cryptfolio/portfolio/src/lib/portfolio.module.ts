@@ -22,6 +22,7 @@ import { AddEditEntryComponent } from './components/dialogs/add-edit-entry/add-e
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteEntryComponent } from './components/dialogs/delete-entry/delete-entry.component';
 import { ClrComponentsModule } from '@projects/shared/clr-components/src';
+import { SummaryComponent } from './components/summary/summary.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,6 +46,6 @@ import { ClrComponentsModule } from '@projects/shared/clr-components/src';
     CoinmarketcapService,
     { provide: CoinsService, useExisting: CoinmarketcapService },
     { provide: TickersService, useExisting: CoinmarketcapService }],
-  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent, CoinComponent, ActionsComponent, AddEditEntryComponent, DeleteEntryComponent]
+  declarations: [PortfolioComponent, EntriesComponent, PercentageComponent, CoinComponent, ActionsComponent, AddEditEntryComponent, DeleteEntryComponent, SummaryComponent]
 })
 export class PortfolioModule { }

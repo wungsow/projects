@@ -1,5 +1,5 @@
 import { UpsertEntry, DeleteEntry } from './../../+state/portfolio.actions';
-import { PortfolioState, PortfolioEntry, Purchase, portfolioEntries, loadingPortfolioEntries } from './../../+state/portfolio.reducer';
+import { PortfolioState, PortfolioEntry, PortfolioSummary, Purchase, portfolioEntries, loadingPortfolioEntries, portfolioSummary } from './../../+state/portfolio.reducer';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -13,6 +13,7 @@ export class PortfolioComponent implements OnInit {
   coinList$ = this.store.select(portfolio => portfolio.coins.data);
   portfolioEntries$ = this.store.select(portfolioEntries);
   entriesLoading$ = this.store.select(loadingPortfolioEntries);
+  summary: PortfolioSummary;
 
   selected: PortfolioEntry;
   showAddEdit = false;
@@ -22,6 +23,7 @@ export class PortfolioComponent implements OnInit {
   constructor(private store: Store<PortfolioState>) { }
 
   ngOnInit() {
+    this.store.select(portfolioSummary).subscribe(summary => this.summary = summary);
   }
 
   addEditClick(purchase) {

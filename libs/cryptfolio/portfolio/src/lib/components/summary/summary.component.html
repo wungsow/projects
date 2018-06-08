@@ -1,0 +1,4 @@
+<div *ngIf=summary>
+  Invested: {{summary.invested | currency : 'USD'}} Current value: {{summary.currentValue | currency : 'USD'}} Change:
+  <pflo-percentage [value]=summary.change></pflo-percentage>
+</div>
