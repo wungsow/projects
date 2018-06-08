@@ -1,4 +1,4 @@
-<clr-datagrid [clrDgLoading]="loading" [(clrDgSingleSelected)]="selected" [clDgRowSelection]="true">
+<clr-datagrid [clrDgLoading]="loading">
   <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
   <clr-dg-column [clrDgField]="'amount'">Amount</clr-dg-column>
   <clr-dg-column [clrDgField]="'price'">Purchase Price</clr-dg-column>
@@ -9,6 +9,10 @@
   <clr-dg-column [clrDgField]="'quote.percent_change_1h'">Activity 1h</clr-dg-column>
 
   <clr-dg-row *clrDgItems="let entry of entries; trackBy: trackEntry" [clrDgItem]="entry">
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)=edit.emit(entry)>Edit</button>
+      <button class="action-item" (click)=delete.emit(entry)>Delete</button>
+    </clr-dg-action-overflow>
     <clr-dg-cell>
       <pflo-coin [coin]=entry></pflo-coin>
     </clr-dg-cell>

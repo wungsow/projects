@@ -7,11 +7,10 @@ import { DialogBase } from '../dialog.base';
   styleUrls: ['./delete-entry.component.scss']
 })
 export class DeleteEntryComponent extends DialogBase {
-
   @Output() deleteSubmitted = new EventEmitter();
 
   submit() {
-    this.deleteSubmitted.emit();
+    this.deleteSubmitted.emit(this.open);
     this.close();
   }
 }

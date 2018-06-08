@@ -17,8 +17,8 @@ export class PortfolioComponent implements OnInit {
 
   selected: PortfolioEntry;
   showAddEdit = false;
-  showDelete = false;
   purchaseToEdit: Purchase;
+  purchaseToDelete: Purchase;
 
   constructor(private store: Store<PortfolioState>) { }
 
@@ -36,11 +36,11 @@ export class PortfolioComponent implements OnInit {
     this.store.dispatch(new UpsertEntry(purchase));
   }
 
-  deleteClick() {
-    this.showDelete = true;
+  deleteClick(entry: PortfolioEntry) {
+    this.purchaseToDelete = entry;
   }
 
-  deleteSubmit() {
-    this.store.dispatch(new DeleteEntry(this.selected.id));
+  deleteSubmit(entry: PortfolioEntry) {
+    this.store.dispatch(new DeleteEntry(entry.id));
   }
 }

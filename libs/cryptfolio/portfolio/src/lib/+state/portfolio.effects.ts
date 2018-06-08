@@ -26,7 +26,7 @@ export class PortfolioEffects {
     {
       run: (action: LoadPortfolio, state: PortfolioState) => {
         const storedPortfolio = this.localStrorageService.getItem<Dictionary<Purchase>>(this.storageKey);
-        return new PortfolioLoaded(Object.values(storedPortfolio));
+        return new PortfolioLoaded(Object.values(storedPortfolio || {}));
       },
 
       onError: (action: LoadPortfolio, error) => {

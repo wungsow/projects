@@ -8,17 +8,12 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ANALYZ
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntriesComponent {
-  private _selected: PortfolioEntry;
 
   @Input() loading = true;
   @Input() entries: PortfolioEntry[];
 
-  get selected(): PortfolioEntry { return this._selected; }
-  @Input() set selected(selected: PortfolioEntry) {
-    this._selected = selected;
-    this.selectedChange.emit(selected);
-  }
-  @Output() selectedChange = new EventEmitter();
+  @Output() edit = new EventEmitter();
+  @Output() delete = new EventEmitter();
 
   trackEntry(index, entry) {
     return entry.id;

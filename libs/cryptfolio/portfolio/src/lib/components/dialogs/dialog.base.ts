@@ -2,17 +2,17 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export abstract class DialogBase {
 
-  private openValue = false;
+  private openValue: any;
 
   get open() { return this.openValue; }
   @Input()
-  set open(open: boolean) {
+  set open(open: any) {
     this.openValue = open;
     this.openChange.emit(this.openValue);
   }
-  @Output() openChange = new EventEmitter<boolean>();
+  @Output() openChange = new EventEmitter<any>();
 
   close() {
-    this.open = false;
+    this.open = null;
   }
 }
