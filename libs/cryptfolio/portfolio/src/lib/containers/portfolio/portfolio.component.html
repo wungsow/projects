@@ -3,7 +3,7 @@
     <div class="content-area">
       <pflo-summary [summary]=summary [loading]=entriesLoading></pflo-summary>
       <pflo-entries [entries]='portfolioEntries$ | async' [loading]='entriesLoading' (edit)='addEditClick($event)' (delete)='deleteClick($event)'></pflo-entries>
-      <pflo-actions (addClick)='addEditClick()' (exportClick)=exportClick (importClick)=importClick></pflo-actions>
+      <pflo-actions (addClick)='addEditClick()' (exportClick)="exportClick()" (importClick)="importClick()"></pflo-actions>
       <pflo-add-edit-entry [(open)]=showAddEdit [coins]="coinList$ | async" (entrySubmitted)="addSubmit($event)" [purchase]=purchaseToEdit></pflo-add-edit-entry>
       <pflo-delete-entry [(open)]=purchaseToDelete (deleteSubmitted)="deleteSubmit($event)"></pflo-delete-entry>
     </div>

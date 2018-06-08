@@ -90,7 +90,7 @@ const getPortfolioState = (state: PortfolioState) => state.portfolio;
 const getTickersState = (state: PortfolioState) => state.tickers;
 const getCurrency = createSelector([getPortfolioState], portfolio => portfolio.currency);
 const getLoading = createSelector([getPortfolioState], portfolio => portfolio.loading);
-const getPurchases = createSelector([getPortfolioState], selectEntities);
+export const getPurchases = createSelector([getPortfolioState], selectEntities);
 const getTickers = createSelector([getTickersState], selectTickers);
 const getTickersLoading = createSelector([getTickersState], state => state.loading);
 

@@ -1,5 +1,6 @@
+import { FileManagerService } from './../../../../../../shared/file-manager/src/lib/file-manager.service';
 import { UpsertEntry, DeleteEntry } from './../../+state/portfolio.actions';
-import { PortfolioState, PortfolioEntry, PortfolioSummary, Purchase, portfolioEntries, loadingPortfolioEntries, portfolioSummary } from './../../+state/portfolio.reducer';
+import { PortfolioState, PortfolioEntry, PortfolioSummary, Purchase, portfolioEntries, loadingPortfolioEntries, portfolioSummary, getPurchases } from './../../+state/portfolio.reducer';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -20,7 +21,7 @@ export class PortfolioComponent implements OnInit {
   purchaseToEdit: Purchase;
   purchaseToDelete: Purchase;
 
-  constructor(private store: Store<PortfolioState>) { }
+  constructor(private store: Store<PortfolioState>, private fileManagerService: FileManagerService) { }
 
   ngOnInit() {
     this.store.select(portfolioSummary).subscribe(summary => this.summary = summary);
@@ -45,7 +46,8 @@ export class PortfolioComponent implements OnInit {
   }
 
   exportClick() {
-
+    this.store.select(getPurchases).subscribe(purchases =>
+      this.fileManagerService.saveJsonToFile(purchases, `portfolio-${new Date().toISOString()}.json`));
   }
 
   importClick() {
