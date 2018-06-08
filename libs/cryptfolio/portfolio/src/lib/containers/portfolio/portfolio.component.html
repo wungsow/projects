@@ -1,8 +1,8 @@
 <div class="main-container">
   <div class="content-container">
     <div class="content-area">
-      <pflo-summary [summary]=summary></pflo-summary>
-      <pflo-entries [entries]='portfolioEntries$ | async' [loading]='entriesLoading$ | async' [(selected)]=selected></pflo-entries>
+      <pflo-summary [summary]=summary [loading]=entriesLoading></pflo-summary>
+      <pflo-entries [entries]='portfolioEntries$ | async' [loading]='entriesLoading' [(selected)]=selected></pflo-entries>
       <pflo-actions [selectionCount]='selected ? 1 : 0' (addClick)='addEditClick()' (editClick)='addEditClick(selected)' (deleteClick)='deleteClick()'></pflo-actions>
       <pflo-add-edit-entry [(open)]=showAddEdit [coins]="coinList$ | async" (entrySubmitted)="addSubmit($event)" [purchase]=purchaseToEdit></pflo-add-edit-entry>
       <pflo-delete-entry [(open)]=showDelete (deleteSubmitted)="deleteSubmit()"></pflo-delete-entry>

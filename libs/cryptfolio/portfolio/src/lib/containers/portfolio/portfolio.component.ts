@@ -12,7 +12,7 @@ export class PortfolioComponent implements OnInit {
   // Store data
   coinList$ = this.store.select(portfolio => portfolio.coins.data);
   portfolioEntries$ = this.store.select(portfolioEntries);
-  entriesLoading$ = this.store.select(loadingPortfolioEntries);
+  entriesLoading = true;
   summary: PortfolioSummary;
 
   selected: PortfolioEntry;
@@ -24,6 +24,7 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(portfolioSummary).subscribe(summary => this.summary = summary);
+    this.store.select(loadingPortfolioEntries).subscribe(loading => this.entriesLoading = loading);
   }
 
   addEditClick(purchase) {

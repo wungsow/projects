@@ -5,10 +5,18 @@
         Summary
       </div>
       <div class="card-block row">
-        <div class="col-md-4">Invested: {{summary.invested | currency : 'USD'}}</div>
-        <div class="col-md-4">Current value: {{summary.currentValue | currency : 'USD'}} </div>
-        <div class="col-md-4">Change: {{summary.currentValue - summary.invested | currency : 'USD'}}
-          <pflo-percentage [value]=summary.change></pflo-percentage>
+        <div class="col-md-4">Invested:
+
+          <span class="font-weight-bold" [clrInlineLoading]=loading>{{summary.invested | currency : 'USD'}}</span>
+        </div>
+        <div class="col-md-4">Current value:
+          <span class="font-weight-bold" [clrInlineLoading]=loading>{{summary.currentValue | currency : 'USD'}}</span>
+        </div>
+        <div class="col-md-4">Change:
+          <span [clrInlineLoading]=loading>
+            <span class="font-weight-bold">{{summary.currentValue - summary.invested | currency : 'USD'}}</span>
+            <pflo-percentage [value]=summary.change></pflo-percentage>
+          </span>
         </div>
       </div>
     </div>
