@@ -43,4 +43,12 @@ export class PortfolioComponent implements OnInit {
   deleteSubmit(entry: PortfolioEntry) {
     this.store.dispatch(new DeleteEntry(entry.id));
   }
+
+  exportClick() {
+
+  }
+
+  importClick() {
+
+  }
 }

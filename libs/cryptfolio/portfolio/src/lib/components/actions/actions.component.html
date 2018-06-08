@@ -1,5 +1,5 @@
 <button class="btn btn-primary" (click)=addClick.emit()>Add</button>
 <div class="btn-group">
-  <button class="btn btn-secondary" [disabled]='selectionCount !== 1' (click)=editClick.emit()>Edit</button>
-  <button class="btn btn-danger-outline" [disabled]='selectionCount === 0' (click)=deleteClick.emit()>Delete</button>
+  <button class="btn btn-secondary" (click)=exportClick.emit()>Export</button>
+  <button class="btn btn-danger-outline" (click)=importClick.emit()>Import</button>
 </div>

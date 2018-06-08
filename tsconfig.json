@@ -36,6 +36,9 @@
       ],
       "@projects/shared/clr-components": [
         "libs/shared/clr-components/src/index.ts"
+      ],
+      "@projects/shared/file-manager": [
+        "libs/shared/file-manager/src/index.ts"
       ]
     }
   },
